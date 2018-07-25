@@ -25,7 +25,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //Redirecciona a la pagina que se debe de ver despues de loguearse
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.

@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('/ecomonedas/index');
 })->name('eco.home');
 
+//Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_usuarios']], function () {
+//    Route::get('registro',          ['as' => 'usuario.registro', 'uses'    => 'UsuarioController@crearUsuario']);
+//});
+
+Route::get('registro',          ['as' => 'registro', 'uses'    => 'UsuarioController@crearUsuario']);
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
