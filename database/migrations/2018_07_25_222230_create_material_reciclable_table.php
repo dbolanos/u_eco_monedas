@@ -13,7 +13,7 @@ class CreateMaterialReciclableTable extends Migration
      */
     public function up()
     {
-        Schema::create('_material_reciclable', function (Blueprint $table) {
+        Schema::create('material_reciclable', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('ruta_imagen');
@@ -30,6 +30,6 @@ class CreateMaterialReciclableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_material_reciclable');
+        Schema::dropIfExists('material_reciclable');
     }
 }

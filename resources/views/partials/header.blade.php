@@ -17,10 +17,10 @@
 				<div class="menu">
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation"><a href="{{route('eco.home')}}" class="active">Inicio</a></li>
-						<li role="presentation"><a href="#">Sobre Nosotros</a></li>
-						<li role="presentation"><a href="#">Centros</a></li>
-						<li role="presentation"><a href="#">Materiales</a></li>
-						<li role="presentation"><a href="#">Contáctenos</a></li>
+						<li role="presentation"><a href="{{route('eco.acerca')}}">Sobre Nosotros</a></li>
+						<li role="presentation"><a href="{{route('eco.centros')}}">Centros</a></li>
+						<li role="presentation"><a href="{{route('eco.materiales')}}">Materiales</a></li>
+						<li role="presentation"><a href="{{route('eco.contacto')}}">Contáctenos</a></li>
             @auth
                 <li role="presentation"><a href="#">Gestiones</a></li>
             @endauth

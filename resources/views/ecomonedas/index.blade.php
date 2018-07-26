@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('titulo','EcoMonedas Inicio')
+@section('titulo','Inicio')
 @section('contenido')
 
   <section id="main-slider" class="no-margin">

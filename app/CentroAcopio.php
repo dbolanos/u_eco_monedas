@@ -14,10 +14,5 @@ class CentroAcopio extends Model
     {
         return $this->belongsTo('App\CanjeMaterialReciclable');
 
-    }
-
-
-
-
-
+    }    
 }

@@ -12,8 +12,24 @@
 */
 
 Route::get('/', function () {
-    return view('/ecomonedas/index');
+    return view('ecomonedas.index');
 })->name('eco.home');
+
+Route::get('materiales', function () {
+    return view('materiales.index');
+})->name('eco.materiales');
+
+Route::get('centros', function () {
+    return view('centrosacopio.index');
+})->name('eco.centros');
+
+Route::get('acerca', function () {
+    return view('otros.acerca-de');
+})->name('eco.acerca');
+
+Route::get('contactenos', function () {
+    return view('otros.contactenos');
+})->name('eco.contacto');
 
 //Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_usuarios']], function () {
 //    Route::get('registro',          ['as' => 'usuario.registro', 'uses'    => 'UsuarioController@crearUsuario']);

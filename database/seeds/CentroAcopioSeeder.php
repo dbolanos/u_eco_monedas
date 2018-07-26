@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\CentroAcopio;
 
+
 class CentroAcopioSeeder extends Seeder
 {
     /**
@@ -20,8 +21,5 @@ class CentroAcopioSeeder extends Seeder
         $centro_acopio->telefono            = '23435678';
         $centro_acopio->estado              = true;
         $centro_acopio->save();
-
-
-
     }
 }
