@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetalleCanjeCuponesTable extends Migration
+class CreateDetalleMaterialReciclableTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateDetalleCanjeCuponesTable extends Migration
      */
     public function up()
     {
-        Schema::create('_detalle__canje__cupones', function (Blueprint $table) {
+        Schema::create('detalle_material_reciclable', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('material_reciclable_id')->unsigned();
             $table->foreign('material_reciclable_id')->references('id')->on('material_reciclable');
-            $table->integer('canje_cupones_id')->unsigned();
-            $table->foreign('canje_cupones_id')->references('id')->on('canje_cupones');
+            $table->integer('canje_material_reciclable_id')->unsigned();
+            $table->foreign('canje_material_reciclable_id')->references('id')->on('canje_material_reciclable');
             $table->decimal('cantidad');
             $table->decimal('sub_total_eco_monedas');
             $table->timestamps();
@@ -32,6 +32,6 @@ class CreateDetalleCanjeCuponesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_detalle__canje__cupones');
+        Schema::dropIfExists('detalle_material_reciclable');
     }
 }

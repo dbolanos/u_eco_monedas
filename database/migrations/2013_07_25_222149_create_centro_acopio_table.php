@@ -13,7 +13,7 @@ class CreateCentroAcopioTable extends Migration
      */
     public function up()
     {
-        Schema::create('_centro__acopio', function (Blueprint $table) {
+        Schema::create('_centro_acopio', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('provincia');
@@ -31,6 +31,6 @@ class CreateCentroAcopioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_centro__acopio');
+        Schema::dropIfExists('centro_acopio');
     }
 }

@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         $user_administrator->name       = 'Administrator';
         $user_administrator->email      = 'admin@test.test';
         $user_administrator->password   = bcrypt('admin');
+        $user_administrator->centro_acopio_id   = 1;
         $user_administrator->save();
 
 
@@ -26,12 +27,14 @@ class UserSeeder extends Seeder
         $admin_acopio_user->name        = 'Dylan Bolaños';
         $admin_acopio_user->email       = 'dbolanos@test.test';
         $admin_acopio_user->password    = bcrypt('testtest');
+        $admin_acopio_user->centro_acopio_id    = 1;
         $admin_acopio_user->save();
 
         $admin_acopio_user_2            = new User();
         $admin_acopio_user_2->name      = 'Diego Arias';
         $admin_acopio_user_2->email     = 'darias@test.test';
         $admin_acopio_user_2->password  = bcrypt('testtest');
+        $admin_acopio_user_2->centro_acopio_id    = 1;
         $admin_acopio_user_2->save();
 
         $administrador_rol  = Role::find(1);
