@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCentroAcopioTable extends Migration
+class CreateCuponesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateCentroAcopioTable extends Migration
      */
     public function up()
     {
-        Schema::create('_centro__acopio', function (Blueprint $table) {
+        Schema::create('_cupones', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->decimal('cantidad_ecomonedas');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateCentroAcopioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_centro__acopio');
+        Schema::dropIfExists('_cupones');
     }
 }
