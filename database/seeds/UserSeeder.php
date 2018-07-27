@@ -27,14 +27,14 @@ class UserSeeder extends Seeder
         $admin_acopio_user->name        = 'Dylan Bolaños';
         $admin_acopio_user->email       = 'dbolanos@test.test';
         $admin_acopio_user->password    = bcrypt('testtest');
-        $admin_acopio_user->centro_acopio_id    = 1;
+        $admin_acopio_user->centro_acopio_id    = 2;
         $admin_acopio_user->save();
 
         $admin_acopio_user_2            = new User();
         $admin_acopio_user_2->name      = 'Diego Arias';
         $admin_acopio_user_2->email     = 'darias@test.test';
         $admin_acopio_user_2->password  = bcrypt('testtest');
-        $admin_acopio_user_2->centro_acopio_id    = 1;
+        $admin_acopio_user_2->centro_acopio_id    = 3;
         $admin_acopio_user_2->save();
 
         $administrador_rol  = Role::find(1);
