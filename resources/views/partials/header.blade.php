@@ -26,9 +26,12 @@
             @endauth
             <!-- Authentication Links -->
             @guest
+				<li role="presentation"><a href="{{ route('cliente.registro') }}">{{ __('Registro Cliente') }}</a></li>
                 <li role="presentation"><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                <li role="presentation"><a href="{{ route('registro') }}">{{ __('Registro') }}</a></li>
               @else
+				@permission('admin_usuarios')
+					<li role="presentation"><a href="{{ route('usuario.registro') }}">{{ __('Registro Usuarios') }}</a></li>
+				@endpermission
                   <li class="nav-item dropdown">
                       <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                           {{ Auth::user()->name }} <span class="caret"></span>

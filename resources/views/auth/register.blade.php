@@ -10,10 +10,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+                <div class="card-header">Registro Cliente</div>
+                <div class="text-center">
+                    <h3> Registro Cliente </h3>
+                </div>
+                <br>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                    <form method="POST" action="{{ route('crear.cliente') }}" aria-label="{{ __('Register') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -79,6 +82,32 @@
 
                             <div class="col-md-6">
                                 <input id="telefono" type="tel" style="border: 2px solid #555" class="form-control" name="telefono" required>
+                            </div>
+                        </div>
+
+                        {{--Roles--}}
+                        <div class="form-group row">
+                            <label for="roles" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Roles') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="roles"  style="border: 2px solid #555" class="form-control" name="roles">
+                                    @foreach($roles as $role)
+                                        <option id="{{ $role->id }}"> {{ $role->display_name }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        {{--Centros Acopio--}}
+                        <div class="form-group row">
+                            <label for="centro_acopio" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Centros de Acopio') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="centro_acopio"  style="border: 2px solid #555" class="form-control" name="centro_acopio">
+                                    @foreach($centros_acopio as $centro_acopio)
+                                        <option id="{{ $centro_acopio->id }}"> {{ $centro_acopio->nombre }} </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

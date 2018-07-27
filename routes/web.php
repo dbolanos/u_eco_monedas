@@ -31,11 +31,16 @@ Route::get('contactenos', function () {
     return view('otros.contactenos');
 })->name('eco.contacto');
 
-//Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_usuarios']], function () {
-//    Route::get('registro',          ['as' => 'usuario.registro', 'uses'    => 'UsuarioController@crearUsuario']);
-//});
 
-Route::get('registro',          ['as' => 'registro', 'uses'    => 'UsuarioController@crearUsuario']);
+Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_usuarios']], function () {
+    Route::get('registro',          ['as' => 'usuario.registro', 'uses'    => 'UsuarioController@crearUsuario']);
+});
+
+
+//Cliente
+
+Route::get('cliente-registro',          ['as' => 'cliente.registro'     , 'uses'    => 'ClienteController@clienteRegistro']);
+Route::post('crear-cliente',            ['as' => 'crear.cliente'        , 'uses'    => 'ClienteController@crearCliente']);
 
 Auth::routes();
 

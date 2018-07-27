@@ -9,7 +9,8 @@ class UsuarioController extends Controller
     //
 
     public function crearUsuario(){
-        return view('auth.register');
+//        return view('auth.register');
+        dd('redirect to admin usuario (CRUD)');
     }
 
 }
