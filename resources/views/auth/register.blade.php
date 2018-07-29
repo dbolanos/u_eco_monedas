@@ -85,35 +85,6 @@
                             </div>
                         </div>
 
-
-                        {{--Roles--}}
-                        @permission(['admin'])
-                        <div class="form-group row">
-                            <label for="roles" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Roles') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="roles"  style="border: 2px solid #555" class="form-control" name="roles">
-                                    @foreach($roles as $role)
-                                        <option id="{{ $role->id }}"> {{ $role->display_name }} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        {{--Centros Acopio--}}
-                        <div class="form-group row">
-                            <label for="centro_acopio" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Centros de Acopio') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="centro_acopio"  style="border: 2px solid #555" class="form-control" name="centro_acopio">
-                                    @foreach($centros_acopio as $centro_acopio)
-                                        <option id="{{ $centro_acopio->id }}"> {{ $centro_acopio->nombre }} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        @endpermission
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

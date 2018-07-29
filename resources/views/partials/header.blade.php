@@ -12,7 +12,6 @@
 					<a href="{{route('eco.home')}}"><h1><span>ECO</span>MONEDAS</h1></a>
 				</div>
 			</div>
-
 			<div class="navbar-collapse collapse">
 				<div class="menu">
 					<ul class="nav nav-tabs" role="tablist">
@@ -37,7 +36,8 @@
                           {{ Auth::user()->name }} <span class="caret"></span>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+						  <a href="#" alt="Centro Acopio">{{ Auth::user()->centroAcopio()->first()->nombre }}</a><br>
+						  <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                               {{ __('Logout') }}
                           </a>
                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
