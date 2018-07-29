@@ -1,19 +1,12 @@
 @extends('layouts.master')
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+@section('titulo','Registro')
 @section('contenido')
+</br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Registro Cliente</div>
-                <div class="text-center">
-                    <h3> Registro Clientes </h3>
-                </div>
+                <div class="card-header"><h2>Registro Cliente</h2></div>
                 <br>
                 {{--<form method="POST" action="{{ route('crear.cliente') }}" aria-label="{{ __('Register') }}">--}}
                 <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
@@ -116,11 +109,13 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Registrarse') }}
                                 </button>
+
                             </div>
                         </div>
+                        </br>
                     </form>
             </div>
             <div class="card-body">

@@ -16,11 +16,12 @@ class CreateCentroAcopiosTable extends Migration
         Schema::create('centro_acopios', function (Blueprint $table) {
           $table->increments('id');
           $table->string('nombre');
-          $table->string('provincia');
+          $table->integer('provincia_id')->unsigned();
           $table->string('direccion_exacta');
           $table->string('telefono');
-          $table->boolean('estado');
+          $table->integer('estado');
           $table->timestamps();
+          $table->foreign('provincia_id')->references('id')->on('provincias');
         });
     }
 
@@ -31,6 +32,11 @@ class CreateCentroAcopiosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('centro_acopios');
+      Schema::table('centro_acopios', function (Blueprint $table) {
+          $table->dropForeign('centro_acopios_provincia_id_foreign');
+          $table->dropColumn('provincia_id');
+      });
+
+      Schema::dropIfExists('centro_acopios');
     }
 }

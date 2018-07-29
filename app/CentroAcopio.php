@@ -8,7 +8,8 @@ class CentroAcopio extends Model
 {
     //
 
-    protected $guarded = 'id';
+    //protected $guarded = 'id';
+    protected $fillable = ['nombre', 'provincia_id', 'direccion_exacta','telefono','estado'];
 
     public function canjeMaterialReciclable()
     {
@@ -18,5 +19,9 @@ class CentroAcopio extends Model
 
     public function user(){
         return $this->belongsTo('App\User');
+    }
+
+    public function provincia() {
+      return $this->belongsTo('App\Provincias');
     }
 }

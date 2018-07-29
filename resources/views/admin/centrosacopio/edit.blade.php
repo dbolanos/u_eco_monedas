@@ -1,10 +1,10 @@
-@extends('layouts.master')
-
+@extends('layouts.admin')
 @section('contenido')
 @include('partials.errors')
+</br>
     <div class="row">
         <div class="col-md-12">
-            <form action="{{route('admin.update',['vj'=>$vj->id])}}" method="post">
+            <form action="{{route('centros.update')}}" method="post">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input
@@ -12,41 +12,60 @@
                     class="form-control"
                     id="nombre"
                     name="nombre"
-                    value="{{$vj->nombre}}">
+                    value="{{$centroacopio->nombre}}">
                 </div>
+
                 <div class="form-group">
-                    <label for="content">Descripción</label>
+                    <label for="provincias">Provincia</label>
+                    <select id="provincias" name="provincias" class="custom-select">
+                      @foreach($provincias as $pro)
+                          <option value="{{ $pro->id }}"
+                            {{($centroacopio->provincia->id==$pro->id) ? 'selected' : ''}}
+                            >{{ $pro->nombre }}</option>
+                      @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Dirección Exacta</label>
                     <textarea
                     class="form-control"
-                    id="descripcion"
-                    name="descripcion">{{$vj->descripcion}}</textarea>
+                    id="direccion"
+                    name="direccion"
+                    rows="3">{{$centroacopio->direccion_exacta}}</textarea>
                 </div>
+
                 <div class="form-group">
-                    <label for="content">Fecha de Estreno Inicial</label>
+                    <label for="telefono">Teléfono</label>
                     <input
-                    type="date"
+                    type="text"
                     class="form-control"
-                    id="fechaEstrenoInicial"
-                    name="fechaEstrenoInicial"
-                    value="{{$vj->fechaEstrenoInicial}}">
+                    id="telefono"
+                    name="telefono"
+                    value="{{$centroacopio->telefono}}">
                 </div>
-                <div class="form-group">
-                  @foreach($plataformas as $plataforma)
-                      <div class="form-check">
-                             <input
-                             class="form-check-input" type="checkbox"
-                             name="plataformas[]"
-                             value="{{ $plataforma->id }}"
-                             {{ $vj->plataformas->contains($plataforma->id) ? 'checked' : '' }}
-                             />
-                           <label class="form-check-label">{{ $plataforma->nombre }}</label>
-                     </div>
-                 @endforeach
-             </div>
-                <input type='hidden' name="id" value="{{ $vj->id }}">
+
+                <fieldset class="form-group">
+                  <legend>Estado</legend>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="estado" id="activo" value="1">
+                      Activo
+                    </label>
+                  </div>
+                  <div class="form-check">
+                  <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="estado" id="inactivo" value="0">
+                      Inactivo
+                    </label>
+                  </div>
+                </fieldset>
+
+                <input type='hidden' name="id" value="{{$centroacopio->id}}">
                 @csrf
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
             </form>
         </div>
     </div>
+  </br>
 @endsection

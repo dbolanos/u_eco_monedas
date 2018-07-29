@@ -15,23 +15,49 @@ Route::get('/', function () {
     return view('ecomonedas.index');
 })->name('eco.home');
 
+Route::get('centros', 'CentroAcopioController@getIndex')->name('eco.centros');
+
+Route::group(['prefix'=>'admincentros'], function(){
+  Route::get('', [
+    'uses'=>'CentroAcopioController@getAdminIndex'
+  ]
+  )->name('centros.index');
+
+  Route::get('create',
+  [
+    'uses'=>'CentroAcopioController@getAdminCreate',
+    'as'=>'centros.create',
+  ]);
+  Route::post('create',
+  [
+    'uses' => 'CentroAcopioController@CentroAdminCreate',
+    'as' => 'centros.create',
+  ]
+  );
+  Route::get('edit/{id}',
+  [
+    'uses'=>'CentroAcopioController@getAdminEdit',
+    'as'=>'centros.edit'
+  ]
+  );
+  Route::post('edit', [
+      'uses' => 'CentroAcopioController@CentroAdminEdit',
+      'as' => 'centros.update'
+  ]);
+
+});
 
 Route::get('materiales', function () {
     return view('materiales.index');
 })->name('eco.materiales');
 
-Route::get('centros', function () {
-    return view('centrosacopio.index');
-})->name('eco.centros');
-
-Route::get('acerca', function () {
-    return view('otros.acerca-de');
-})->name('eco.acerca');
-
 Route::get('contactenos', function () {
     return view('otros.contactenos');
 })->name('eco.contacto');
 
+Route::get('admin', function () {
+    return view('admin.index');
+})->name('eco.admin');
 
 Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_usuarios']], function () {
     Route::get('registro',          ['as' => 'usuario.registro', 'uses'    => 'UsuarioController@crearUsuario']);

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('titulo','Inicio')
 @section('contenido')
-
+  
   <section id="main-slider" class="no-margin">
       @isset($mensaje)
           <div class="alert alert-{{$mensaje['tipo']}}" role="alert">
