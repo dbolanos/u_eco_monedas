@@ -66,7 +66,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //TODO Validar la informacion recibida con un Validator
-
+        dd($data);
         if(in_array('centro_acopio', $data)){
             $centro_acopio = $data->centro_acopio;
         }
@@ -81,8 +81,8 @@ class RegisterController extends Controller
             'centro_acopio_id'  => $centro_acopio,
         ]);
 
-        //Este centro de acopio sera solo para clientes ya que sera un centro por default
-        if($centro_acopio == 1){
+        //Si no tiene un centro de acopio asignado es porque posiblemente es un cliente
+        if(in_array('centro_acopio', $data)){
             $cliente                            = new Cliente();
             $cliente->nombre_completo           = $data['name'];
             $cliente->correo                    = $data['email'];
@@ -94,7 +94,7 @@ class RegisterController extends Controller
             $cliente->save();
         }
 
-        //Retornar el usuario para verificarlo y que automaticamente lo devuelva logueado
+        //Se retorna el usuario para verificarlo y que automaticamente se logue
         return $user;
     }
 }

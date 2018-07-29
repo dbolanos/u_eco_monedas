@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'centro_acopio_id'
+        'name', 'email', 'password', 'centro_acopio_id', 'estado'
     ];
 
     /**
@@ -35,6 +35,6 @@ class User extends Authenticatable
     }
 
     public function centroAcopio(){
-        return $this->hasOne('App\CentroAcopio');
+        return $this->belongsTo('App\CentroAcopio');
     }
 }

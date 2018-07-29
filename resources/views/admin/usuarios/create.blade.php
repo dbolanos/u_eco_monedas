@@ -1,50 +1,115 @@
 @extends('layouts.master')
-
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
 @section('contenido')
-@include('partials.errors')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Registro Usuarios</div>
+                    <div class="text-center">
+                        <h3> Registro Usuarios </h3>
+                    </div>
+                    <br>
+                    {{--<form method="POST" action="{{ route('crear.cliente') }}" aria-label="{{ __('Register') }}">--}}
+                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                        @csrf
 
-    <div class="row">
-        <div class="col-md-12">
-            <form action="{{route('admin.create')}}" method="post">
-              <div class="form-group">
-                  <label for="nombre">Nombre</label>
-                  <input
-                  type="text"
-                  class="form-control"
-                  id="nombre"
-                  name="nombre">
-              </div>
-              <div class="form-group">
-                  <label for="content">Descripción</label>
-                  <textarea
-                  class="form-control"
-                  id="descripcion"
-                  name="descripcion"></textarea>
-              </div>
-              <div class="form-group">
-                  <label for="content">Fecha de Estreno Inicial</label>
-                  <input
-                  type="date"
-                  class="form-control"
-                  id="fechaEstrenoInicial"
-                  name="fechaEstrenoInicial">
-              </div>
-              <div class="form-group">
-              @foreach($plataformas as $plataforma)
-                  <div class="form-check">
-                         <input
-                         "form-check-input"
-                         type="checkbox"
-                         name="plataformas[]"
-                         value="{{ $plataforma->id }}"
-                        />
-                       <label class="form-check-label">{{ $plataforma->nombre }}</label>
-                 </div>
-             @endforeach
-             </div>
-              @csrf
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
+                        <div class="form-group row">
+                            <label for="name" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" style="border: 2px solid #555" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Correo Electrónico') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" style="border: 2px solid #555" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" style="border: 2px solid #555" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" style="border: 2px solid #555" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+
+                        {{--Roles--}}
+                        @permission(['admin'])
+                        <div class="form-group row">
+                            <label for="roles" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Roles') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="roles"  style="border: 2px solid #555" class="form-control" name="roles">
+                                    @foreach($roles as $role)
+                                        <option id="{{ $role->id }}"> {{ $role->display_name }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        {{--Centros Acopio--}}
+                        <div class="form-group row">
+                            <label for="centro_acopio" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Centros de Acopio') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="centro_acopio"  style="border: 2px solid #555" class="form-control" name="centro_acopio">
+                                    @foreach($centros_acopio as $centro_acopio)
+                                        <option id="{{ $centro_acopio->id }}"> {{ $centro_acopio->nombre }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endpermission
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Registrar Usuario') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
         </div>
     </div>
 @endsection
