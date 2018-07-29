@@ -3,6 +3,12 @@
 @section('contenido')
 
   <section id="main-slider" class="no-margin">
+      @isset($mensaje)
+          <div class="alert alert-{{$mensaje['tipo']}}" role="alert">
+              {!! $mensaje['msg'] !!}
+              <button type="button" class="close" data-dismiss="alert" areia-label="Close"> <span aria-hidden="true">&times;</span></button>
+          </div>
+      @endif
           <div class="carousel slide">
               <div class="carousel-inner">
                   <div class="item active" style="background-image: url(images/slider/bg1.jpg)">
@@ -15,7 +21,6 @@
                                       <a class="btn-slide animation animated-item-3" href="#">Leer Más</a>
                                   </div>
                               </div>
-
                               <div class="col-sm-6 hidden-xs animation animated-item-4">
                                   <div class="slider-img">
                                       <img src="images/slider/img3.png" class="img-responsive">

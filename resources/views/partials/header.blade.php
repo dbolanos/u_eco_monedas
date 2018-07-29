@@ -29,7 +29,7 @@
 				<li role="presentation"><a href="{{ route('cliente.registro') }}">{{ __('Registro Cliente') }}</a></li>
                 <li role="presentation"><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
               @else
-				@permission('admin_usuarios')
+				@permission(['admin_usuarios'])
 					<li role="presentation"><a href="{{ route('usuario.registro') }}">{{ __('Registro Usuarios') }}</a></li>
 				@endpermission
                   <li class="nav-item dropdown">

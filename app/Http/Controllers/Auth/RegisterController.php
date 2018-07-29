@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\CentroAcopio;
+use App\Cliente;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -64,18 +65,36 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $centro_acopio = CentroAcopio::find($data->centro_acopio);
+        //TODO Validar la informacion recibida con un Validator
+
+        if(in_array('centro_acopio', $data)){
+            $centro_acopio = $data->centro_acopio;
+        }
+        else{
+            $centro_acopio = 1;
+        }
 
         $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'              => $data['name'],
+            'email'             => $data['email'],
+            'password'          => Hash::make($data['password']),
+            'centro_acopio_id'  => $centro_acopio,
         ]);
 
-        $user->centroAcopio()->associate($centro_acopio);
-        $user->save();
+        //Este centro de acopio sera solo para clientes ya que sera un centro por default
+        if($centro_acopio == 1){
+            $cliente                            = new Cliente();
+            $cliente->nombre_completo           = $data['name'];
+            $cliente->correo                    = $data['email'];
+            $cliente->telefono                  = $data['telefono'];
+            $cliente->direccion_exacta          = $data['direccion'];
+            $cliente->eco_monedas_disponibles   = 0;
+            $cliente->eco_monedas_gastadas      = 0;
 
+            $cliente->save();
+        }
 
+        //Retornar el usuario para verificarlo y que automaticamente lo devuelva logueado
         return $user;
     }
 }

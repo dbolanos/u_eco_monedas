@@ -12,11 +12,11 @@
             <div class="card">
                 <div class="card-header">Registro Cliente</div>
                 <div class="text-center">
-                    <h3> Registro Cliente </h3>
+                    <h3> Registro Clientes </h3>
                 </div>
                 <br>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('crear.cliente') }}" aria-label="{{ __('Register') }}">
+                {{--<form method="POST" action="{{ route('crear.cliente') }}" aria-label="{{ __('Register') }}">--}}
+                <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -85,7 +85,9 @@
                             </div>
                         </div>
 
+
                         {{--Roles--}}
+                        @permission(['admin'])
                         <div class="form-group row">
                             <label for="roles" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Roles') }}</label>
 
@@ -110,6 +112,7 @@
                                 </select>
                             </div>
                         </div>
+                        @endpermission
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -119,7 +122,8 @@
                             </div>
                         </div>
                     </form>
-                </div>
+            </div>
+            <div class="card-body">
             </div>
         </div>
     </div>

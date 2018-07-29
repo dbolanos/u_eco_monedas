@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('ecomonedas.index');
 })->name('eco.home');
 
+
 Route::get('materiales', function () {
     return view('materiales.index');
 })->name('eco.materiales');
@@ -36,11 +37,10 @@ Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_u
     Route::get('registro',          ['as' => 'usuario.registro', 'uses'    => 'UsuarioController@crearUsuario']);
 });
 
-
 //Cliente
 
 Route::get('cliente-registro',          ['as' => 'cliente.registro'     , 'uses'    => 'ClienteController@clienteRegistro']);
-Route::post('crear-cliente',            ['as' => 'crear.cliente'        , 'uses'    => 'ClienteController@crearCliente']);
+Route::post('crear-usuario',            ['as' => 'crear.usuario'        , 'uses'    => 'RegisterController@create']);
 
 Auth::routes();
 
