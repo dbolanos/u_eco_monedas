@@ -59,14 +59,17 @@ Route::get('admin', function () {
     return view('admin.index');
 })->name('eco.admin');
 
+
+//Admin Usuario
 Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_usuarios']], function () {
-    Route::get('registro',          ['as' => 'usuario.registro', 'uses'    => 'UsuarioController@crearUsuario']);
+    Route::get('index',             ['as' => 'usuario.index'            , 'uses'    => 'UsuarioController@getIndexUsuario']);
+    Route::get('registro',          ['as' => 'usuario.registro'         , 'uses'    => 'UsuarioController@getCrearUsuario']);
+    Route::post('crear',            ['as' => 'crear.usuario'            , 'uses'    => 'UsuarioController@crearUsuario']);
 });
 
-//Cliente
-
+// Crear Usuario y Cliente
 Route::get('cliente-registro',          ['as' => 'cliente.registro'     , 'uses'    => 'ClienteController@clienteRegistro']);
-Route::post('crear-usuario',            ['as' => 'crear.usuario'        , 'uses'    => 'RegisterController@create']);
+
 
 Auth::routes();
 

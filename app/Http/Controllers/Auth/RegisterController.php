@@ -58,7 +58,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Create a new user for customers instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\User
@@ -66,14 +66,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //TODO Validar la informacion recibida con un Validator
-        dd($data);
-        if(in_array('centro_acopio', $data)){
-            $centro_acopio = $data->centro_acopio;
-        }
-        else{
-            $centro_acopio = 1;
-        }
 
+        //Este centro de acopio sera el default para cliente y el administrador
+
+        $centro_acopio = 1;
+
+        //Creacion del usuario para el cliente
         $user = User::create([
             'name'              => $data['name'],
             'email'             => $data['email'],
@@ -81,18 +79,16 @@ class RegisterController extends Controller
             'centro_acopio_id'  => $centro_acopio,
         ]);
 
-        //Si no tiene un centro de acopio asignado es porque posiblemente es un cliente
-        if(in_array('centro_acopio', $data)){
-            $cliente                            = new Cliente();
-            $cliente->nombre_completo           = $data['name'];
-            $cliente->correo                    = $data['email'];
-            $cliente->telefono                  = $data['telefono'];
-            $cliente->direccion_exacta          = $data['direccion'];
-            $cliente->eco_monedas_disponibles   = 0;
-            $cliente->eco_monedas_gastadas      = 0;
 
-            $cliente->save();
-        }
+        $cliente                            = new Cliente();
+        $cliente->nombre_completo           = $data['name'];
+        $cliente->correo                    = $data['email'];
+        $cliente->telefono                  = $data['telefono'];
+        $cliente->direccion_exacta          = $data['direccion'];
+        $cliente->eco_monedas_disponibles   = 0;
+        $cliente->eco_monedas_gastadas      = 0;
+
+        $cliente->save();
 
         //Se retorna el usuario para verificarlo y que automaticamente se logue
         return $user;

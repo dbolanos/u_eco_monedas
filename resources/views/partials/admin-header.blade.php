@@ -15,6 +15,11 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Materiales</a>
       </li>
+      @permission(['admin_usuarios'])
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('usuario.index') }}"> Usuarios </a>
+      </li>
+      @endpermission
     </ul>
 
 

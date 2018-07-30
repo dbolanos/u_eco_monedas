@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('titulo','Registro')
+@section('titulo','Registro Cliente')
 @section('contenido')
 </br>
 <div class="container">
@@ -8,7 +8,6 @@
             <div class="card">
                 <div class="card-header"><h2>Registro Cliente</h2></div>
                 <br>
-                {{--<form method="POST" action="{{ route('crear.cliente') }}" aria-label="{{ __('Register') }}">--}}
                 <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
 
