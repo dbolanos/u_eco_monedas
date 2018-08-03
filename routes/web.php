@@ -17,39 +17,23 @@ Route::get('/', function () {
 
 Route::get('centros', 'CentroAcopioController@getIndex')->name('eco.centros');
 
-Route::group(['prefix'=>'admincentros'], function(){
-  Route::get('', [
-    'uses'=>'CentroAcopioController@getAdminIndex'
-  ]
-  )->name('centros.index');
-
-  Route::get('create',
-  [
-    'uses'=>'CentroAcopioController@getAdminCreate',
-    'as'=>'centros.create',
-  ]);
-  Route::post('create',
-  [
-    'uses' => 'CentroAcopioController@CentroAdminCreate',
-    'as' => 'centros.create',
-  ]
-  );
-  Route::get('edit/{id}',
-  [
-    'uses'=>'CentroAcopioController@getAdminEdit',
-    'as'=>'centros.edit'
-  ]
-  );
-  Route::post('edit', [
-      'uses' => 'CentroAcopioController@CentroAdminEdit',
-      'as' => 'centros.update'
-  ]);
-
+Route::group(['prefix'=>'admincentros','middleware' => ['auth', 'permission:centro_acopio']], function(){
+  Route::get('', ['uses'=>'CentroAcopioController@getAdminIndex'])->name('centros.index');
+  Route::get('create',['uses'=>'CentroAcopioController@getAdminCreate','as'=>'centros.create',]);
+  Route::post('create',['uses' => 'CentroAcopioController@CentroAdminCreate','as' => 'centros.create',]);
+  Route::get('edit/{id}',['uses'=>'CentroAcopioController@getAdminEdit','as'=>'centros.edit']);
+  Route::post('edit', ['uses' => 'CentroAcopioController@CentroAdminEdit','as' => 'centros.update']);
 });
 
-Route::get('materiales', function () {
-    return view('materiales.index');
-})->name('eco.materiales');
+Route::get('materiales', 'MaterialesController@getIndex')->name('eco.materiales');
+
+Route::group(['prefix'=>'adminmateriales','middleware' => ['auth', 'permission:materiales_reciclables']], function(){
+  Route::get('', ['uses'=>'MaterialesController@getAdminIndex'])->name('materiales.index');
+  Route::get('create',['uses'=>'MaterialesController@getAdminCreate','as'=>'materiales.create',]);
+  Route::post('create',['uses' => 'MaterialesController@MaterialesAdminCreate','as' => 'materiales.create',]);
+  Route::get('edit/{id}',['uses'=>'MaterialesController@getAdminEdit','as'=>'materiales.edit']);
+  Route::post('edit', ['uses' => 'MaterialesController@MaterialesAdminEdit','as' => 'materiales.update']);
+});
 
 Route::get('contactenos', function () {
     return view('otros.contactenos');
