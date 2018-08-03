@@ -11,7 +11,7 @@ class CentroAcopioController extends Controller
 {
 
   public function getIndex(){
-    $centros = CentroAcopio::where('estado',true)->orderBy('provincia_id', 'asc')->get();
+    $centros = CentroAcopio::where('estado',true)->orderBy('provincia_id', 'asc')->paginate(4);
     return view('centrosacopio.index',['centros'=>$centros]);
   }
 

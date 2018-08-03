@@ -16,7 +16,7 @@ class CreateDetalleMaterialReciclableTable extends Migration
         Schema::create('detalle_material_reciclable', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('material_reciclable_id')->unsigned();
-            $table->foreign('material_reciclable_id')->references('id')->on('material_reciclable');
+            $table->foreign('material_reciclable_id')->references('id')->on('material_reciclables');
             $table->integer('canje_material_reciclable_id')->unsigned();
             $table->foreign('canje_material_reciclable_id')->references('id')->on('canje_material_reciclable');
             $table->decimal('cantidad');

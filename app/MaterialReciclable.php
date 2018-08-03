@@ -11,6 +11,5 @@ class MaterialReciclable extends Model
 
     public function detalleCanjeMaterialReciclable(){
         return $this->belongToMany('App\DetalleCanjeMaterialReciclable');
-    } 
-
+    }
 }
