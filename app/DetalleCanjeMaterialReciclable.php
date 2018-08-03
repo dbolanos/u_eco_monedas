@@ -14,6 +14,6 @@ class DetalleCanjeMaterialReciclable extends Model
     }
 
     public function canjeMaterialReciclable(){
-        return $this->belongsTo('CanjeMaterialReciclable');
+        return $this->belongsTo('App\CanjeMaterialReciclable');
     }
 }

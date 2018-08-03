@@ -10,7 +10,7 @@ class MaterialReciclable extends Model
     protected $guarded = 'id';
 
     public function detalleCanjeMaterialReciclable(){
-        return $this->belongToMany('App\detall');
-    }
+        return $this->belongToMany('App\DetalleCanjeMaterialReciclable');
+    } 
 
 }
