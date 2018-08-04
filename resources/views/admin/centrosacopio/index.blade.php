@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 @section('titulo','Centros')
 @section('contenido')
 
@@ -38,4 +38,5 @@
     @endforeach
   </tbody>
 </table>
+</br>
 @endsection

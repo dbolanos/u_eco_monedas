@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 @section('contenido')
 @include('partials.errors')
 </br>

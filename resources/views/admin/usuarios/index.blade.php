@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 @section('titulo','Admin Usuarios')
 @section('contenido')
     @if($mensaje = Session::get('mensaje'))
