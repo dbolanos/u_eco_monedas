@@ -61,8 +61,13 @@ Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_u
     Route::post('crear',            ['as' => 'crear.usuario'            , 'uses'    => 'UsuarioController@crearUsuario']);
 });
 
+
+//Cambiar Contrasena Usuario
+Route::get('cambiar-contrasena',    ['as' => 'cambiar_contrasena.usuario' , 'uses'  => 'UsuarioController@cambiarContrasenaUsuario']);
+Route::post('contrasena-usuario',   ['as' => 'contrasena.usuario'         , 'uses'  => 'UsuarioController@contrasenaUsuario']);
+
 // Crear Usuario y Cliente
-Route::get('cliente-registro',          ['as' => 'cliente.registro'     , 'uses'    => 'ClienteController@clienteRegistro']);
+Route::get('cliente-registro',      ['as' => 'cliente.registro'         , 'uses'    => 'ClienteController@clienteRegistro']);
 
 
 Auth::routes();
