@@ -56,6 +56,13 @@ Route::get('admin', function () {
 })->name('eco.admin');
 
 
+//Canje Material Reciclable
+Route::group(['prefix' => 'canje-material','middleware' => ['auth', 'permission:materiales_reciclables']], function () {
+    Route::get('index',             ['as' => 'canje_material.index'     , 'uses'    => 'CanjeMaterialReciclableController@getIndexCanjeMaterial']);
+
+});
+
+
 //Admin Usuario
 Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_usuarios']], function () {
     Route::get('index',             ['as' => 'usuario.index'            , 'uses'    => 'UsuarioController@getIndexUsuario']);
