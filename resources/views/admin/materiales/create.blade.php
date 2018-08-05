@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('titulo','Crear Material')
 @section('contenido')
 @include('partials.errors')
 </br>

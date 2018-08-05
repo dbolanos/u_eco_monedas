@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@section('titulo','Editar Usuario')
 @section('contenido')
 @include('partials.errors')
     <div class="row">

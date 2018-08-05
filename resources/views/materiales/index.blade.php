@@ -7,10 +7,10 @@
   @foreach ($materiales as $mat)
   <div class="col">
     <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-      <div class="card-header">{{$mat->nombre}}</div>
+      <div class="card-header"><h3>{{$mat->nombre}}</h3></div>
         <div class="card-body">
           <h4 class="card-title">Valor: {{$mat->valor_ecomoneda}}</h4>
-          <p class="card-text" style="color:{{$mat->color}}">Color</p>
+          <h4 class="card-title" style="color:{{$mat->color}}">Color</h4>
           <img src="{{asset('storage/'.$mat->ruta_imagen)}}" alt"{{$mat->nombre}}" class="img-thumbnail img-fluid" />
         </div>
     </div>

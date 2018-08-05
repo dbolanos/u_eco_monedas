@@ -1,10 +1,12 @@
 @extends('layouts.master')
-
+@section('titulo','Editar Cupón')
 @section('contenido')
 @include('partials.errors')
-    <div class="row">
-        <div class="col-md-12">
-            <form action="{{route('admin.update',['vj'=>$vj->id])}}" method="post">
+  </br>
+    <legend>Editar Cupón</legend>
+      <div class="row">
+          <div class="col-md-12">
+              <form action="{{route('cupones.update',['cupones'=>$cupones->id])}}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input
@@ -12,41 +14,43 @@
                     class="form-control"
                     id="nombre"
                     name="nombre"
-                    value="{{$vj->nombre}}">
+                    value="{{$cupones->nombre}}">
                 </div>
+
                 <div class="form-group">
-                    <label for="content">Descripción</label>
-                    <textarea
-                    class="form-control"
-                    id="descripcion"
-                    name="descripcion">{{$vj->descripcion}}</textarea>
+                  <label for="content">Descripción</label>
+                  <textarea class="form-control"
+                  id="descripcion"
+                  name="descripcion"
+                  rows="3">{{$cupones->descripcion}}</textarea>
                 </div>
+
                 <div class="form-group">
-                    <label for="content">Fecha de Estreno Inicial</label>
+                    <label for="content">Cantidad Ecomonedas</label>
                     <input
-                    type="date"
+                    type="number"
                     class="form-control"
-                    id="fechaEstrenoInicial"
-                    name="fechaEstrenoInicial"
-                    value="{{$vj->fechaEstrenoInicial}}">
+                    id="cantidad"
+                    name="cantidad"
+                    value="{{$cupones->cantidad_ecomonedas}}">
                 </div>
+
                 <div class="form-group">
-                  @foreach($plataformas as $plataforma)
-                      <div class="form-check">
-                             <input
-                             class="form-check-input" type="checkbox"
-                             name="plataformas[]"
-                             value="{{ $plataforma->id }}"
-                             {{ $vj->plataformas->contains($plataforma->id) ? 'checked' : '' }}
-                             />
-                           <label class="form-check-label">{{ $plataforma->nombre }}</label>
-                     </div>
-                 @endforeach
-             </div>
-                <input type='hidden' name="id" value="{{ $vj->id }}">
+                    <label for="content">Imagen</label>
+                    <input
+                    type="file"
+                    class="form-control-file"
+                    id="archivoImagen"
+                    name="archivoImagen"
+                    accept="image/*">
+                </div>
+
+                <input type='hidden' name="id" value="{{ $cupones->id }}">
                 @csrf
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
-        </div>
-    </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+              </form>
+          </div>
+      </div>
+  </br>
+
 @endsection

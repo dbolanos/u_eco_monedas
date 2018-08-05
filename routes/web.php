@@ -35,6 +35,16 @@ Route::group(['prefix'=>'adminmateriales','middleware' => ['auth', 'permission:m
   Route::post('edit', ['uses' => 'MaterialesController@MaterialesAdminEdit','as' => 'materiales.update']);
 });
 
+Route::get('cupones', 'CuponesController@getIndex')->name('eco.cupones');
+
+Route::group(['prefix'=>'admincupones','middleware' => ['auth', 'permission:cupones_canje']], function(){
+  Route::get('', ['uses'=>'CuponesController@getAdminIndex'])->name('cupones.index');
+  Route::get('create',['uses'=>'CuponesController@getAdminCreate','as'=>'cupones.create',]);
+  Route::post('create',['uses' => 'CuponesController@CuponesAdminCreate','as' => 'cupones.create',]);
+  Route::get('edit/{id}',['uses'=>'CuponesController@getAdminEdit','as'=>'cupones.edit']);
+  Route::post('edit', ['uses' => 'CuponesController@CuponesAdminEdit','as' => 'cupones.update']);
+});
+
 Route::get('contactenos', function () {
     return view('otros.contactenos');
 })->name('eco.contacto');

@@ -7,11 +7,11 @@
   @foreach ($centros as $ca)
   <div class="col">
     <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-      <div class="card-header">{{$ca->provincia->nombre}}</div>
+      <div class="card-header"><h3>{{$ca->provincia->nombre}}</h3></div>
         <div class="card-body">
           <h4 class="card-title">{{$ca->nombre}}</h4>
-          <p class="card-text">Dirección: {{$ca->direccion_exacta}}</p>
-          <p class="card-text">Tel: {{$ca->telefono}}</p>
+          <p class="fa fa-map-marker fa-2x card-text"> {{$ca->direccion_exacta}}</p>
+          <p class="fa fa-phone-square fa-lg card-text"> {{$ca->telefono}}</p>
         </div>
     </div>
   </div>

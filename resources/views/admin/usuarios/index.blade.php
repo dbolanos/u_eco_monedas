@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('titulo','Admin Usuarios')
+@section('titulo','Gestión Usuarios')
 @section('contenido')
     @if($mensaje = Session::get('mensaje'))
         <div class="alert alert-{{$mensaje['tipo_mensaje']}}" role="alert">

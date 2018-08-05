@@ -20,22 +20,24 @@
               <a class="nav-link" href="{{route('eco.contacto')}}">Contáctenos</a>
             </li>
             @auth
+              @permission(['admin'])
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestiones</a>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                   <a class="dropdown-item" href="{{route('centros.index')}}">Centros de Acopio</a>
                   <a class="dropdown-item" href="{{route('materiales.index')}}">Materiales Reciclaje</a>
-                  <a class="dropdown-item" href="#">Cupones</a>
+                  <a class="dropdown-item" href="{{route('cupones.index')}}">Cupones</a>
                   @permission(['admin_usuarios'])
                   <a class="dropdown-item" href="{{route('usuario.index')}}">Usuarios</a>
                   @endpermission
                 </div>
               </li>
+              @endpermission
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Canjes</a>
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                   <a class="dropdown-item" href="#">Materiales Reciclables</a>
-                  <a class="dropdown-item" href="#">Cupones</a>
+                  <a class="dropdown-item" href="{{route('eco.cupones')}}">Cupones</a>
                 </div>
               </li>
             @endauth

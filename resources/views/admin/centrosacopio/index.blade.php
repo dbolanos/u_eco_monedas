@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('titulo','Centros')
+@section('titulo','Gestión Centros')
 @section('contenido')
 
 @if(Session::has('info'))
