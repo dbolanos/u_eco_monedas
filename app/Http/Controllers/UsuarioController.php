@@ -67,8 +67,8 @@ class UsuarioController extends Controller
         $usuario = User::find($id);
 
         //Obtener todos los roles excepto el de cliente y administrador (Id = 3 y Id = 1)
-//        $roles = Role::all()->except([1, 3]);
-        $roles = Role::all();
+        $roles = Role::all()->except([1, 3]);
+
 
         //Except el centro acopio general, que esta reservado para los cliente y el admin
         $centros_acopio = CentroAcopio::all()->except([1]);
@@ -80,22 +80,39 @@ class UsuarioController extends Controller
 
     public function actualizarUsuario(Request $request)
     {
-        $this->validate($request, [
-            'name'      => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-        ]);
+        try{
+            $this->validate($request, [
+                'name'      => 'required|string|max:255',
+                'email'     => 'required|string|email|max:255',
+            ]);
 
-        $usuario                    = User::find($request->id_usuario);
-        $usuario->name              = $request->name;
-        $usuario->email             = $request->email;
-        $usuario->centro_acopio_id  = $request->centro_acopio;
-        $usuario->roles()->sync($request->roles);
+            $usuario                    = User::find($request->id_usuario);
+            $usuario->name              = $request->name;
+            $usuario->email             = $request->email;
+            $usuario->centro_acopio_id  = $request->centro_acopio;
+            $usuario->roles()->sync($request->roles);
+            $mensaje                    = ['tipo_mensaje' => 'success', 'msg' => 'Usuario editado satisfactoriamente: ' . $usuario->name];
 
-        $usuario->save();
+            if($request->cambio_contrasena == 'on'){
+                if($request->password === $request->password_confirm && (!is_null($request->password) && $request->password != '') ){
+                    $this->validate($request, [
+                        'password'      => 'required|string|max:255|min:5'
+                    ]);
+                    $usuario->password  = Hash::make($request->password);
+                }else{
+                    $mensaje            = ['tipo_mensaje' => 'danger', 'msg' => 'Error, Por favor verifica la nueva contraseña'];
+                }
+            }
 
-        $mensaje                    = ['tipo_mensaje' => 'success', 'msg' => 'Usuario editado satisfactoriamente: ' . $usuario->name];
+            $usuario->save();
 
-        return redirect()->route('usuario.index')->with('mensaje', $mensaje);
+            return redirect()->route('usuario.index')->with('mensaje', $mensaje);
+        }catch(Exception $e){
+            \Log::error('Error editando usuario. '. $e->getMessage());
+            $mensaje            = ['tipo_mensaje' => 'danger', 'msg' => 'Error, Por favor verifica el usuario y la informacion ingresada'];
+            return redirect()->route('usuario.index')->with('mensaje', $mensaje);
+        }
+
     }
 
 
@@ -116,7 +133,6 @@ class UsuarioController extends Controller
             'required'              => 'El campo :attribute es obligatorio.',
             'min'                   => 'El campo :attribute no puede tener menos de :min carácteres.'
         );
-
 
         $validation = Validator::make($request->all(), $rules, $messages);
         if ($validation->fails()) {

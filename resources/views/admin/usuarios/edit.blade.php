@@ -1,6 +1,12 @@
 @extends('layouts.master')
 @section('titulo','Registro Usuario')
 @section('contenido')
+ <style>
+    .form-check-input{
+        width: 100%;
+        height:30px;
+    }
+ </style>
 </br>
 <div class="container">
     <div class="row justify-content-center">
@@ -39,28 +45,6 @@
                         </div>
                     </div>
 
-                    {{--<div class="form-group row">--}}
-                    {{--<label for="password" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>--}}
-
-                    {{--<div class="col-md-6">--}}
-                    {{--<input id="password" type="password" style="border: 2px solid #555" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>--}}
-
-                    {{--@if ($errors->has('password'))--}}
-                    {{--<span class="invalid-feedback" role="alert">--}}
-                    {{--<strong>{{ $errors->first('password') }}</strong>--}}
-                    {{--</span>--}}
-                    {{--@endif--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="form-group row">--}}
-                    {{--<label for="password-confirm" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>--}}
-
-                    {{--<div class="col-md-6">--}}
-                    {{--<input id="password-confirm" type="password" style="border: 2px solid #555" class="form-control" name="password_confirmation" required>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-
                     {{--Roles--}}
                     @permission(['admin'])
                     <div class="form-group row">
@@ -97,6 +81,40 @@
                     </div>
                     @endpermission
 
+                    <div class="form-group row">
+                        <input type="checkbox" id="cambio_contrasena" name="cambio_contrasena" style="border: 2px solid #555" class="form-check-input"
+                               value="on" />
+                        <label for="cambio_contrasena" style="color:black" class="col-md-4 col-form-label text-md-right">Cambiar Contraseña</label>
+                    </div>
+
+                    <div class="container_contrasena">
+                    <div class="form-group row">
+                    <label for="password" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+
+                    <div class="col-md-6">
+                    <input id="password" type="password" style="border: 2px solid #555" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" >
+
+                    @if ($errors->has('password'))
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                    @endif
+                    </div>
+                    </div>
+
+                    <div class="form-group row">
+                    <label for="password-confirm" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
+
+                    <div class="col-md-6">
+                    <input id="password_confirm" type="password" style="border: 2px solid #555" class="form-control" name="password_confirm">
+                    </div>
+                    </div>
+                    </div>
+
+
+
+
+
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-success">
@@ -113,4 +131,20 @@
         </div>
     </div>
 </div>
+
+    <script>
+        $( document ).ready(function() {
+            $('.container_contrasena').hide();
+
+            $('.form-check-input').on( "click", function() {
+                if( $('#cambio_contrasena').prop('checked') ) {
+                    $('.container_contrasena').show();
+                }
+                else{
+                    $('.container_contrasena').hide();
+                }
+            });
+
+        });
+    </script>
 @endsection
