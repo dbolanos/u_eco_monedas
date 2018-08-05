@@ -33,7 +33,7 @@
                                 <td>{{ $usuario->email }}</td>
                                 <td>{{ $usuario->centroAcopio()->first()->nombre }}</td>
                                 <td>{{ $usuario->estado }}</td>
-                                <td>Editar</td>
+                                <td> <a href="{{ route('editar.usuario', $usuario->id) }}"> Editar usuario <span class="glyphicon glyphicon-refresh"></span>  </a> </td>
                             </tr>
                         @endforeach
                         </tbody>

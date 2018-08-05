@@ -54,13 +54,50 @@ class UsuarioController extends Controller
             return redirect()->route('usuario.index')->with('mensaje', $mensaje);
 
         } catch (\Exception $e) {
-            \Log::error('Problema con usuario: ' . $e->getMessage());
+            \Log::error('Error crearUsuario: ' . $e->getMessage());
             $mensaje = ['tipo_mensaje' => 'danger', 'msg' => 'Error! Usuario no creado...'];
 
             return redirect()->route('usuario.index')->with('mensaje', $mensaje);
         }
 
     }
+
+    public function getUsuarioEditar($id)
+    {
+        $usuario = User::find($id);
+
+        //Obtener todos los roles excepto el de cliente y administrador (Id = 3 y Id = 1)
+//        $roles = Role::all()->except([1, 3]);
+        $roles = Role::all();
+
+        //Except el centro acopio general, que esta reservado para los cliente y el admin
+        $centros_acopio = CentroAcopio::all()->except([1]);
+
+        return view('admin.usuarios.edit', ['usuario'=> $usuario, 'roles' => $roles, 'centros_acopio' => $centros_acopio]);
+
+
+    }
+
+    public function actualizarUsuario(Request $request)
+    {
+        $this->validate($request, [
+            'name'      => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        $usuario                    = User::find($request->id_usuario);
+        $usuario->name              = $request->name;
+        $usuario->email             = $request->email;
+        $usuario->centro_acopio_id  = $request->centro_acopio;
+        $usuario->roles()->sync($request->roles);
+
+        $usuario->save();
+
+        $mensaje                    = ['tipo_mensaje' => 'success', 'msg' => 'Usuario editado satisfactoriamente: ' . $usuario->name];
+
+        return redirect()->route('usuario.index')->with('mensaje', $mensaje);
+    }
+
 
     public function cambiarContrasenaUsuario()
     {

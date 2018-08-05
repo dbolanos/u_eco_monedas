@@ -15,6 +15,14 @@ class CentroAcopioSeeder extends Seeder
     {
         //
         $centro_acopio                      = new CentroAcopio();
+        $centro_acopio->nombre              = 'General';
+        $centro_acopio->provincia_id        = 1;
+        $centro_acopio->direccion_exacta    = 'General';
+        $centro_acopio->telefono            = '-';
+        $centro_acopio->estado              = 1;
+        $centro_acopio->save();
+
+        $centro_acopio                      = new CentroAcopio();
         $centro_acopio->nombre              = 'Recicladora y Maquila HYO';
         $centro_acopio->provincia_id        = 2;
         $centro_acopio->direccion_exacta    = '50 metros sur del matadero de Pipasa';

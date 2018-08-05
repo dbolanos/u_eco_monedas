@@ -59,6 +59,8 @@ Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_u
     Route::get('index',             ['as' => 'usuario.index'            , 'uses'    => 'UsuarioController@getIndexUsuario']);
     Route::get('registro',          ['as' => 'usuario.registro'         , 'uses'    => 'UsuarioController@getCrearUsuario']);
     Route::post('crear',            ['as' => 'crear.usuario'            , 'uses'    => 'UsuarioController@crearUsuario']);
+    Route::get('editar/{id}',       ['as' => 'editar.usuario'           , 'uses'    => 'UsuarioController@getUsuarioEditar']);
+    Route::post('actualizar',       ['as' => 'actualizar.usuario'       , 'uses'    => 'UsuarioController@actualizarUsuario']);
 });
 
 
