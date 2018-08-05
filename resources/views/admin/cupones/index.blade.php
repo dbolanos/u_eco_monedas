@@ -21,7 +21,7 @@
 
 <table class="table table-hover">
   <thead>
-    <tr class="table-success">
+    <tr class="table-primary">
       <th scope="col">Nombre</th>
       <th scope="col">Editar</th>
     </tr>

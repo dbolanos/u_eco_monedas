@@ -2,30 +2,28 @@
 @section('titulo','Centros Acopio')
 @section('contenido')
 </br>
-
-<div class="row">
-  @foreach ($centros as $ca)
-  <div class="col">
-    <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-      <div class="card-header"><h3>{{$ca->provincia->nombre}}</h3></div>
-        <div class="card-body">
-          <h4 class="card-title">{{$ca->nombre}}</h4>
-          <p class="fa fa-map-marker fa-2x card-text"> {{$ca->direccion_exacta}}</p>
-          <p class="fa fa-phone-square fa-lg card-text"> {{$ca->telefono}}</p>
-        </div>
-    </div>
-  </div>
+  @foreach($centros->chunk(3) as $centrosChunk)
+      <div class="row">
+          @foreach($centrosChunk as $centros)
+              <div class="col-sm-6 col-md-4">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{$centros->nombre}}</h5>
+                    <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{$centros->direccion_exacta}}</p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <i class="fas fa-phone" aria-hidden="true"></i>
+                      {{$centros->telefono}}
+                      <span class="badge badge-pill badge-info">
+                        {{$centros->provincia->nombre}}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          @endforeach
+      </div>
+    </br>
   @endforeach
-</div>
-
-</br>
-
-</div>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      {{$centros->links()}}
-    </div>
-  </div>
-</br>
-
 @endsection

@@ -1,36 +1,40 @@
 @extends('layouts.master')
 @section('titulo','Inicio')
 @section('contenido')
-  
-  <section id="main-slider" class="no-margin">
-      @isset($mensaje)
-          <div class="alert alert-{{$mensaje['tipo']}}" role="alert">
-              {!! $mensaje['msg'] !!}
-              <button type="button" class="close" data-dismiss="alert" areia-label="Close"> <span aria-hidden="true">&times;</span></button>
-          </div>
-      @endif
-          <div class="carousel slide">
-              <div class="carousel-inner">
-                  <div class="item active" style="background-image: url(images/slider/bg1.jpg)">
-                      <div class="container">
-                          <div class="row slide-margin">
-                              <div class="col-sm-6">
-                                  <div class="carousel-content">
-                                      <h2 class="animation animated-item-1" style="text-shadow: 2px 2px #000000">Bienvenido <span>EcoMonedas</span></h2>
-                                      <p class="animation animated-item-2" style="text-shadow: 2px 2px #000000"><b>La inversión en reciclaje que premia</b></p>
-                                      <a class="btn-slide animation animated-item-3" href="#">Leer Más</a>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6 hidden-xs animation animated-item-4">
-                                  <div class="slider-img">
-                                      <img src="images/slider/img3.png" class="img-responsive">
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div><!--/.item-->
-              </div><!--/.carousel-inner-->
-          </div><!--/.carousel-->
-      </section><!--/#main-slider-->
-
+</br>
+<div class="row">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100"
+        src="https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100"
+        src="https://images.pexels.com/photos/1130268/pexels-photo-1130268.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100"
+        src="https://images.pexels.com/photos/1125298/pexels-photo-1125298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260e"
+        alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+</br>
 @endsection

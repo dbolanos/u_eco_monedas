@@ -2,22 +2,25 @@
 @section('titulo','Materiales')
 @section('contenido')
 </br>
-
-<div class="row">
-  @foreach ($materiales as $mat)
-  <div class="col">
-    <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-      <div class="card-header"><h3>{{$mat->nombre}}</h3></div>
-        <div class="card-body">
-          <h4 class="card-title">Valor: {{$mat->valor_ecomoneda}}</h4>
-          <h4 class="card-title" style="color:{{$mat->color}}">Color</h4>
-          <img src="{{asset('storage/'.$mat->ruta_imagen)}}" alt"{{$mat->nombre}}" class="img-thumbnail img-fluid" />
-        </div>
-    </div>
-  </div>
+  @foreach($materiales->chunk(3) as $materialesChunk)
+      <div class="row">
+          @foreach($materialesChunk as $materiales)
+              <div class="col-sm-6 col-md-4">
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="{{asset('storage/'.$materiales->ruta_imagen)}}" alt"{{$materiales->nombre}}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{$materiales->nombre}}</h5>
+                    <p class="card-text"><i class="fas fa-coins"></i> Precio unitario equivalente a Ecomoneda: {{$materiales->valor_ecomoneda}}</p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="color:{{$materiales->color}}">
+                      Color
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          @endforeach
+      </div>
+    </br>
   @endforeach
-</div>
-
-
-</br>
 @endsection
