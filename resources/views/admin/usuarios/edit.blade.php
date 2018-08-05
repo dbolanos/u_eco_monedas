@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('titulo','Registro Usuario')
 @section('contenido')
+    <script type="text/javascript" src="{{ URL::to('js/jquery-3.3.1.js') }}"></script>
  <style>
     .form-check-input{
         width: 100%;

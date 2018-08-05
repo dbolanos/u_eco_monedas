@@ -93,6 +93,7 @@ class PermissionsRolesSeeder extends Seeder
         $rol_admin_acopio->attachPermission(Permission::find(6));
         
         $rol_cliente           = Role::find(3);
+        $rol_cliente->attachPermission(Permission::find(4));
         $rol_cliente->attachPermission(Permission::find(6));
         
     }

@@ -68,7 +68,6 @@ class RegisterController extends Controller
         //TODO Validar la informacion recibida con un Validator
 
         //Este centro de acopio sera el default para cliente y el administrador
-
         $centro_acopio = 1;
 
         //Creacion del usuario para el cliente
@@ -89,6 +88,8 @@ class RegisterController extends Controller
         $cliente->eco_monedas_gastadas      = 0;
 
         $cliente->save();
+
+        $user->roles()->attach(3);
 
         //Se retorna el usuario para verificarlo y que automaticamente se logue
         return $user;

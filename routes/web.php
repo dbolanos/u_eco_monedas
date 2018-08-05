@@ -65,8 +65,8 @@ Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_u
 
 
 //Cambiar Contrasena Usuario
-Route::get('cambiar-contrasena',    ['as' => 'cambiar_contrasena.usuario' , 'uses'  => 'UsuarioController@cambiarContrasenaUsuario']);
-Route::post('contrasena-usuario',   ['as' => 'contrasena.usuario'         , 'uses'  => 'UsuarioController@contrasenaUsuario']);
+Route::get('cambiar-contrasena',    ['as' => 'cambiar_contrasena.usuario' , 'uses'  => 'UsuarioController@cambiarContrasenaUsuario'])->middleware(['auth', 'permission:cambio_contrasena']);
+Route::post('contrasena-usuario',   ['as' => 'contrasena.usuario'         , 'uses'  => 'UsuarioController@contrasenaUsuario'])->middleware(['auth', 'permission:cambio_contrasena']);
 
 // Crear Usuario y Cliente
 Route::get('cliente-registro',      ['as' => 'cliente.registro'         , 'uses'    => 'ClienteController@clienteRegistro']);
