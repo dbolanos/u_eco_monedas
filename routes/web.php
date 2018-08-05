@@ -26,6 +26,8 @@ Route::group(['prefix'=>'admincentros','middleware' => ['auth', 'permission:cent
 });
 
 Route::get('materiales', 'MaterialesController@getIndex')->name('eco.materiales');
+Route::get('canjemateriales', 'MaterialesController@getCanjeIndex')->name('eco.canjemateriales');
+
 
 Route::group(['prefix'=>'adminmateriales','middleware' => ['auth', 'permission:materiales_reciclables']], function(){
   Route::get('', ['uses'=>'MaterialesController@getAdminIndex'])->name('materiales.index');

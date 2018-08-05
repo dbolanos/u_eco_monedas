@@ -136,7 +136,6 @@
     <script>
         $( document ).ready(function() {
             $('.container_contrasena').hide();
-
             $('.form-check-input').on( "click", function() {
                 if( $('#cambio_contrasena').prop('checked') ) {
                     $('.container_contrasena').show();
@@ -145,7 +144,6 @@
                     $('.container_contrasena').hide();
                 }
             });
-
         });
     </script>
 @endsection

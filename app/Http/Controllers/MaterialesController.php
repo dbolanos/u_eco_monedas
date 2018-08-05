@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\MaterialReciclable;
+use App\Cliente;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -11,6 +12,12 @@ class MaterialesController extends Controller
   public function getIndex(){
     $materiales = MaterialReciclable::orderBy('nombre', 'asc')->get();
     return view('materiales.index',['materiales'=>$materiales]);
+  }
+
+  public function getCanjeIndex(){
+    $materiales = MaterialReciclable::all();
+    $clientes = Cliente::all();
+    return view('materiales.canjemateriales',['materiales'=>$materiales,'clientes'=>$clientes]);
   }
 
   public function getAdminIndex(){

@@ -49,7 +49,7 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @permission(['materiales_reciclables'])
-                        <a class="dropdown-item" href="#"><i class="fas fa-boxes"></i> Materiales Reciclables</a>
+                        <a class="dropdown-item" href="{{route('eco.canjemateriales')}}"><i class="fas fa-boxes"></i> Materiales Reciclables</a>
                         @endpermission
                         @permission(['cupones_canje'])
                         <a class="dropdown-item" href="{{route('eco.cupones')}}"><i class="fas fa-shopping-cart"></i>
