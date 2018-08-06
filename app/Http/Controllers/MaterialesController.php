@@ -14,12 +14,6 @@ class MaterialesController extends Controller
     return view('materiales.index',['materiales'=>$materiales]);
   }
 
-  public function getCanjeIndex(){
-    $materiales = MaterialReciclable::all();
-    $clientes = Cliente::all();
-    return view('materiales.canjemateriales',['materiales'=>$materiales,'clientes'=>$clientes]);
-  }
-
   public function getAdminIndex(){
     $materiales = MaterialReciclable::orderBy('nombre', 'asc')->get();
     return view('admin.materiales.index',['materiales'=>$materiales]);
@@ -73,6 +67,15 @@ class MaterialesController extends Controller
       $material->color = Input::get('color');
       $material->save();
       return redirect()->route('materiales.index')->with('info', 'Material: ' . $request->input('nombre').' editado');
+  }
+
+  public function getMaterial(Request $request){
+      try{
+          return json_encode(MaterialReciclable::find($request->id_material));
+      }catch(Exception $e){
+          return json_encode('Error, No se encontro el material');
+      }
+
   }
 
 }
