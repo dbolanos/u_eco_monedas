@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Cupon;
+use App\Cart;
+Use Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -67,6 +69,25 @@ class CuponesController extends Controller
       $cupon->cantidad_ecomonedas = Input::get('cantidad');
       $cupon->save();
       return redirect()->route('cupones.index')->with('info', 'Cupón: ' . $request->input('nombre').' editado');
+  }
+
+  public function getAddToCart(Request $request, $id) {
+      $cupon = Cupon::find($id);
+      $oldCart = Session::has('cart') ? Session::get('cart') : null;
+      $cart = new Cart($oldCart);
+      $cart->add($cupon, $cupon->id);
+
+      $request->session()->put('cart', $cart);
+      return redirect()->route('eco.canjecupones');
+  }
+
+  public function getCart() {
+      if (!Session::has('cart')) {
+          return view('cupones.carritocupones');
+      }
+      $oldCart = Session::get('cart');
+      $cart = new Cart($oldCart);
+      return view('cupones.carritocupones', ['cupones' => $cart->items, 'totalPrice' => $cart->totalPrice]);
   }
 
 }

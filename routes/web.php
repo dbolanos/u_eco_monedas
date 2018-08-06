@@ -28,7 +28,6 @@ Route::group(['prefix'=>'admincentros','middleware' => ['auth', 'permission:cent
 Route::get('materiales', 'MaterialesController@getIndex')->name('eco.materiales');
 Route::get('canjemateriales', 'MaterialesController@getCanjeIndex')->name('eco.canjemateriales');
 
-
 Route::group(['prefix'=>'adminmateriales','middleware' => ['auth', 'permission:materiales_reciclables']], function(){
   Route::get('', ['uses'=>'MaterialesController@getAdminIndex'])->name('materiales.index');
   Route::get('create',['uses'=>'MaterialesController@getAdminCreate','as'=>'materiales.create',]);
@@ -38,6 +37,8 @@ Route::group(['prefix'=>'adminmateriales','middleware' => ['auth', 'permission:m
 });
 
 Route::get('canjecupones', 'CuponesController@getCanjeIndex')->name('eco.canjecupones');
+Route::get('/add-to-cart/{id}', 'CuponesController@getAddToCart')->name('eco.addToCart');
+Route::get('/shopping-cart', 'CuponesController@getCart')->name('eco.shoppingCart');
 
 Route::group(['prefix'=>'admincupones','middleware' => ['auth', 'permission:cupones_canje']], function(){
   Route::get('', ['uses'=>'CuponesController@getAdminIndex'])->name('cupones.index');

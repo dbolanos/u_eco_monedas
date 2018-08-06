@@ -25,7 +25,7 @@
             <p class="description">{{ $cupon->descripcion }}</p>
             <div class="clearfix">
               <div class="pull-left price"><i class="fas fa-coins"></i> {{ $cupon->cantidad_ecomonedas }}</div>
-                <a href="#"
+                <a href="{{route('eco.addToCart', ['id' => $cupon->id])}}"
                   class="btn btn-success pull-right" role="button"><i class="fas fa-cart-plus"></i> Agregar</a>
             </div>
           </div>

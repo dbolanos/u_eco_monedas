@@ -74,9 +74,11 @@
                 @endpermission
                 @permission(['cupones_canje'])
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route('eco.shoppingCart')}}">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito Compras
-                        <span class="badge">#</span>
+                        <span class="badge">
+                          {{Session::has('cart') ? Session::get('cart')->totalQty : ''}}
+                        </span>
                     </a>
                 </li>
                 @endpermission
