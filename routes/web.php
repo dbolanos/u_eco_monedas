@@ -63,10 +63,6 @@ Route::get('admin', function () {
 //Canje Material Reciclable
 Route::group(['prefix' => 'canje-material','middleware' => ['auth', 'permission:materiales_reciclables']], function () {
     Route::get('index',                     ['as' => 'canje_material.index'     , 'uses'    => 'CanjeMaterialReciclableController@getIndexCanjeMaterial']);
-//    Route::get('guardar-canje-material', function () {
-//        return json_encode('hola');
-//    });
-    //Obtener informacion de material
     Route::get('get-material',              ['as' => 'eco.get_material'             , 'uses'    => 'MaterialesController@getMaterial']);
     Route::post('guardar-canje-material',   ['as' => 'eco.guardar_canje_material'   , 'uses'    => 'CanjeMaterialReciclableController@guardarCanjeMaterial']);
 

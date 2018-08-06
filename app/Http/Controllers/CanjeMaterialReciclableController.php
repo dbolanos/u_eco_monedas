@@ -31,12 +31,9 @@ class CanjeMaterialReciclableController extends Controller
             $canje_materiales->total_eco_monedas    = $detalles['total_ecomonedas'];
             $canje_materiales->detalles             = json_encode($detalles['detalles_items']);
 
-//            return json_encode($canje_materiales);
             $canje_materiales->fecha_canje = $fecha_actual->format('Y-m-d H:i:s');
 
             $canje_materiales->save();
-
-
 
             return json_encode('Canje registrado, Id: '. $canje_materiales->id);
 
