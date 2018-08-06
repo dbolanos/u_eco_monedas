@@ -37,7 +37,7 @@ Route::group(['prefix'=>'adminmateriales','middleware' => ['auth', 'permission:m
   Route::post('edit', ['uses' => 'MaterialesController@MaterialesAdminEdit','as' => 'materiales.update']);
 });
 
-Route::get('cupones', 'CuponesController@getIndex')->name('eco.cupones');
+Route::get('canjecupones', 'CuponesController@getCanjeIndex')->name('eco.canjecupones');
 
 Route::group(['prefix'=>'admincupones','middleware' => ['auth', 'permission:cupones_canje']], function(){
   Route::get('', ['uses'=>'CuponesController@getAdminIndex'])->name('cupones.index');

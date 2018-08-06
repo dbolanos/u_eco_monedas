@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Input;
 
 class CuponesController extends Controller
 {
-  public function getIndex(){
+  public function getCanjeIndex(){
     $cupones = Cupon::orderBy('nombre','asc')->get();
-    return view('cupones.index',['cupones'=>$cupones]);
+    return view('cupones.canjecupones',['cupones'=>$cupones]);
   }
 
   public function getAdminIndex(){

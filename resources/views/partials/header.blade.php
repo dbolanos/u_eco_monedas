@@ -52,7 +52,7 @@
                         <a class="dropdown-item" href="{{route('eco.canjemateriales')}}"><i class="fas fa-boxes"></i> Materiales Reciclables</a>
                         @endpermission
                         @permission(['cupones_canje'])
-                        <a class="dropdown-item" href="{{route('eco.cupones')}}"><i class="fas fa-shopping-cart"></i>
+                        <a class="dropdown-item" href="{{route('eco.canjecupones')}}"><i class="fas fa-shopping-cart"></i>
                             Cupones</a>
                         @endpermission
                     </div>
@@ -71,6 +71,14 @@
                 @permission(['admin_usuarios'])
                 <li class="nav-link"><a href="{{ route('usuario.registro') }}"><i
                                 class="fas fa-user-plus"></i> {{ __('Registro Usuarios') }}</a></li>
+                @endpermission
+                @permission(['cupones_canje'])
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito Compras
+                        <span class="badge">#</span>
+                    </a>
+                </li>
                 @endpermission
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
