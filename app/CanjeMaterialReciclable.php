@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class CanjeMaterialReciclable extends Model
 {
     //
+    protected $guarded = 'id';
+
+    protected $table = 'canje_material_reciclable';
+
 
     public function centroAcopio(){
         return $this->belongsTo('App\CentroAcopio');
@@ -20,7 +24,7 @@ class CanjeMaterialReciclable extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function detallesCanjeMaterialReciclable(){
-        return $this->belongsToMany('App\DetallesCanjeMaterialReciclable');
-    }
+//    public function detallesCanjeMaterialReciclable(){
+//        return $this->belongsToMany('App\DetallesCanjeMaterialReciclable');
+//    }
 }
