@@ -2,6 +2,7 @@
 @section('titulo','Canje Materiales')
 @section('contenido')
     {{--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>--}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </br>
 <div class="container">
     <div class="form-group">
@@ -9,14 +10,15 @@
 
         <div class="form-group">
             <label for="usuario">Clientes</label>
-            <select id="usuario" name="usuario" class="custom-select">
+            <select id="cliente" name="cliente" class="custom-select">
                 @foreach($clientes as $cli)
                     <option value="{{ $cli->id }}">{{ $cli->nombre_completo }}</option>
                 @endforeach
             </select>
         </div>
-
-        <inpu type="hidden" name="array_canje_materiales" id="array_canje_materiales" value=""></inpu>
+        <input type="hidden" id="usuario_id" value="{{Auth::id()}}">
+        <input type="hidden" id="id_centro_acopio" value="{{ Auth::user()->centroAcopio->id  }}">
+        <input type="hidden" name="array_canje_materiales" id="array_canje_materiales" value=""></input>
 
         <div class="container">
             <div class="row">
@@ -62,7 +64,7 @@
         </tbody>
     </table>
 </div>
-
+ <br>
 <div class="col-md-4">
     <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -77,10 +79,9 @@
 </div>
 
 </br>
-<form action="#" method="POST">
-    <button type="submit" class="btn btn-success">Canjear</button>
 
-</form>
+    <button type="submit" id="canjear_materiales" class="btn btn-success">Canjear</button>
+
 
 <script type="text/javascript" src="{{ URL::to('js/canjeMateriales.js') }}" ></script>
 

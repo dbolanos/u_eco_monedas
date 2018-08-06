@@ -29,7 +29,6 @@ $( document ).ready(function() {
             })
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
-                        console.log( "La solicitud se ha completado correctamente."+ JSON.stringify(data) );
                         material = {id_material : data['id'], nombre_material : data['nombre'], ruta_imagen: data['ruta_imagen'],
                             valor_ecomoneda : data['valor_ecomoneda'], cantidad_material : cantidad_material,
                             total_valor_item : (data['valor_ecomoneda'] * cantidad_material)
@@ -37,7 +36,6 @@ $( document ).ready(function() {
                         canjeMateriales['detalles_items'].push(material);
                         canjeMateriales['cantidad_items']   +=  parseInt(material['cantidad_material']);
                         canjeMateriales['total_ecomonedas'] +=  material['total_valor_item'];
-                        console.log(canjeMateriales);
                         renderCanjeMateriales();
                     }
                 })
@@ -61,25 +59,65 @@ $( document ).ready(function() {
             // var detalles_items.push(canjeMateriales['detalles_items']);
             // console.log(detalles_items);
             $.each(canjeMateriales['detalles_items'], function( key, item ) {
-                console.log(JSON.stringify(item['nombre_material']));
                 var row_table = '<tr>'+
                     '<td>'+ item['nombre_material'] +'</td>'+
                     '<td>'+ item['cantidad_material'] +'</td>'+
                     '<td>'+ item['total_valor_item'] +'</td>'+
                     '<td><a href="'+ key +'" class="eliminar">Eliminar</a></td>'+
                     '</tr>';
-                console.log(row_table);
                 html_tbody    += row_table;
             });
         }
 
-        // console.log(html_tbody);
-
         $('#Tabla_Material > tbody').html(html_tbody);
-
         $('#total_eco_monedas').text(canjeMateriales['total_ecomonedas']);
         $('#total_materiales').text(canjeMateriales['cantidad_items']);
 
     }
+
+
+    $('#canjear_materiales').on('click', function () {
+        console.log('Canjenado...');
+
+        var cliente             = $('#cliente').val();
+        var usuario             = $('#usuario_id').val();
+        var centro_acopio_id    = $('#id_centro_acopio').val();
+
+        if(canjeMateriales['cantidad_items'] > 0 && cliente != null){
+
+
+            $.ajax({
+                //Como se ejecuta un POST necesitamos el token de CSRF, (lo tomamos de un meta que esta en el blade)
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                // En data puedes utilizar un objeto JSON, un array o un query string
+                data: {"detalles" : canjeMateriales, "cliente_id" : cliente, "centro_acopio_id" : centro_acopio_id, "usuario_id" : usuario},
+                //Cambiar a type: POST si necesario
+                type: "POST",
+                // Formato de datos que se espera en la respuesta
+                dataType: "json",
+                // URL a la que se enviará la solicitud Ajax
+                url: "guardar-canje-material",
+            })
+                .done(function( data, textStatus, jqXHR ) {
+                    if ( console && console.log ) {
+                        console.log( "Exito, " + JSON.stringify(data) );
+                        alert(data);
+                    }
+                })
+                .fail(function( jqXHR, textStatus, errorThrown ) {
+                    if ( console && console.log ) {
+                        alert('Error en la transaccion');
+                        console.log( "La solicitud a fallado: " +  textStatus + ' ' + errorThrown);
+                    }
+                });
+
+        }
+        else{
+            alert('No se han agregado Materiales o no se encontro el cliente');
+        }
+
+    })
 
 });
