@@ -36,7 +36,7 @@ class CanjeMaterialReciclableController extends Controller
             $canje_materiales->save();
             $cliente->save();
 
-            return json_encode('Canje registrado, Id: '. $canje_materiales->id);
+            return json_encode($canje_materiales->id);
 
     }
 

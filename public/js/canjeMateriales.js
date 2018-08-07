@@ -44,13 +44,19 @@ $( document ).ready(function() {
                 .fail(function( jqXHR, textStatus, errorThrown ) {
                     if ( console && console.log ) {
                         console.log( "La solicitud a fallado: " +  textStatus + '  ' + errorThrown);
-                        alert('Error, no se ha logrado la transaccion');
+                        $('.msg_alerts').html('<div class="alert alert-warning" role="alert">'+
+                                                '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                                                'No se ha logrado la transaccion del material'+
+                                            '</div>');
                     }
                 });
 
         }
         else{
-            alert('Verifica tus datos, en materiales');
+            $('.msg_alerts').html('<div class="alert alert-warning" role="alert">'+
+                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                                    'Verifica tus datos, en la seccion de materiales'+
+                                '</div>');
         }
     })
 
@@ -102,39 +108,61 @@ $( document ).ready(function() {
         var usuario             = $('#usuario_id').val();
         var centro_acopio_id    = $('#id_centro_acopio').val();
 
-        if(canjeMateriales['cantidad_items'] > 0 && cliente != null){
+        if(cliente != null){
 
+            if(canjeMateriales['cantidad_items'] > 0){
 
-            $.ajax({
-                //Como se ejecuta un POST necesitamos el token de CSRF, (lo tomamos de un meta que esta en el blade)
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                // En data puedes utilizar un objeto JSON, un array o un query string
-                data: {"detalles" : canjeMateriales, "cliente_id" : cliente, "centro_acopio_id" : centro_acopio_id, "usuario_id" : usuario},
-                //Cambiar a type: POST si necesario
-                type: "POST",
-                // Formato de datos que se espera en la respuesta
-                dataType: "json",
-                // URL a la que se enviará la solicitud Ajax
-                url: "guardar-canje-material",
-            })
-                .done(function( data, textStatus, jqXHR ) {
-                    if ( console && console.log ) {
-                        console.log( "Exito, " + JSON.stringify(data) );
-                        alert(data);
-                    }
+                $.ajax({
+                    //Como se ejecuta un POST necesitamos el token de CSRF, (lo tomamos de un meta que esta en el blade)
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // En data puedes utilizar un objeto JSON, un array o un query string
+                    data: {"detalles" : canjeMateriales, "cliente_id" : cliente, "centro_acopio_id" : centro_acopio_id, "usuario_id" : usuario},
+                    //Cambiar a type: POST si necesario
+                    type: "POST",
+                    // Formato de datos que se espera en la respuesta
+                    dataType: "json",
+                    // URL a la que se enviará la solicitud Ajax
+                    url: "guardar-canje-material",
                 })
-                .fail(function( jqXHR, textStatus, errorThrown ) {
-                    if ( console && console.log ) {
-                        alert('Error en la transaccion');
-                        console.log( "La solicitud a fallado: " +  textStatus + ' ' + errorThrown);
-                    }
-                });
+                    .done(function( data, textStatus, jqXHR ) {
+                        if ( console && console.log ) {
+                            console.log( "Exito, " + JSON.stringify(data) );
+                            // alert(data);
+                            $('.msg_alerts').html('<div class="alert alert-success" role="alert">'+
+                                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                                                    '<h4 class="alert-heading">Canje Materiales Exitoso!!</h4>'+
+                                                    '<p>El canje se ha llevado con exito. Este es el id de tu factura: '+ data +' </p>'+
+                                                    '<p class="mb-0"><a href="#" class="alert-link">Presiona aqui para ver el recibo</a></p>'+
+                                                '</div>');
+                            canjeMateriales = {cantidad_items : 0, total_ecomonedas : 0, detalles_items : []};
+                            renderCanjeMateriales();
+                        }
+                    })
+                    .fail(function( jqXHR, textStatus, errorThrown ) {
+                        if ( console && console.log ) {
+                            console.log( "La solicitud a fallado: " +  textStatus + ' ' + errorThrown);
+                            $('.msg_alerts').html('<div class="alert alert-danger" role="alert">'+
+                                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                                                    'Error, ha ocurrido un problema en la transaccion'+
+                                                '</div>');
+                        }
+                    });
 
+            }
+            else{
+                $('.msg_alerts').html('<div class="alert alert-warning" role="alert">'+
+                                        '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                                        'No se han encontrado materiales en el canje'+
+                                    '</div>');
+            }
         }
         else{
-            alert('No se han agregado Materiales o no se encontro el cliente');
+            $('.msg_alerts').html('<div class="alert alert-warning" role="alert">'+
+                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                                    'No se ha seleccionado el cliente'+
+                                '</div>');
         }
 
     })
