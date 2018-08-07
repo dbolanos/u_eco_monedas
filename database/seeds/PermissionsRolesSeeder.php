@@ -48,6 +48,11 @@ class PermissionsRolesSeeder extends Seeder
                 'display_name'  => 'Cambio de Contrasena',
                 'description'   => 'Cambiar Contrasena'
             ],
+            [
+                'name'          => 'carrito_compras',
+                'display_name'  => 'Acceso al carrito de compras',
+                'description'   => 'Canje de cupones por productos'
+            ],
         ];
 
         //Crear el objeto en la base de datos
@@ -80,7 +85,7 @@ class PermissionsRolesSeeder extends Seeder
         }
 
         //Asignar todos los permisos al rol de Administrador General
-        $permisos_administrador = Permission::all();
+        $permisos_administrador = Permission::all()->except(7);
         $rol_administrador      = Role::find(1);
         foreach($permisos_administrador as $permiso_administrador){
             $rol_administrador->attachPermission($permiso_administrador);
@@ -95,6 +100,7 @@ class PermissionsRolesSeeder extends Seeder
         $rol_cliente           = Role::find(3);
         $rol_cliente->attachPermission(Permission::find(4));
         $rol_cliente->attachPermission(Permission::find(6));
+        $rol_cliente->attachPermission(Permission::find(7));
         
     }
 }

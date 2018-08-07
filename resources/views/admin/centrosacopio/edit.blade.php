@@ -50,13 +50,21 @@
                   <legend>Estado</legend>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="estado" id="activo" value="1">
+                        @if($centroacopio->estado == 1)
+                            <input type="radio" class="form-check-input" name="estado" id="activo" value="1" checked>
+                        @else
+                            <input type="radio" class="form-check-input" name="estado" id="activo" value="1" >
+                        @endif
                       Activo
                     </label>
                   </div>
                   <div class="form-check">
                   <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="estado" id="inactivo" value="0">
+                      @if($centroacopio->estado == 0)
+                        <input type="radio" class="form-check-input" name="estado" id="inactivo" value="0" checked>
+                      @else
+                          <input type="radio" class="form-check-input" name="estado" id="inactivo" value="0">
+                      @endif
                       Inactivo
                     </label>
                   </div>

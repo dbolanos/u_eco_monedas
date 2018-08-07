@@ -16,7 +16,7 @@ class CentroAcopioController extends Controller
   }
 
   public function getAdminIndex(){
-    $centros= CentroAcopio::orderBy('provincia_id', 'asc')->get();
+    $centros = CentroAcopio::where('id', '!=', 1)->orderBy('provincia_id', 'asc')->get();
     return view('admin.centrosacopio.index',['centros'=>$centros]);
   }
 

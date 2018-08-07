@@ -72,7 +72,7 @@
                 <li class="nav-link"><a href="{{ route('usuario.registro') }}"><i
                                 class="fas fa-user-plus"></i> {{ __('Registro Usuarios') }}</a></li>
                 @endpermission
-                @permission(['cupones_canje'])
+                @permission(['carrito_compras'])
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('eco.shoppingCart')}}">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito Compras
