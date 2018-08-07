@@ -56,7 +56,8 @@
         <tr>
             <th scope="col">Material</th>
             <th scope="col">Cantidad</th>
-            <th scope="col">Valor EcoMonedas</th>
+            <th scope="col">Valor EcoMoneda</th>
+            <th scope="col">SubTotal EcoMonedas</th>
             <th scope="col">Acción</th>
         </tr>
         </thead>

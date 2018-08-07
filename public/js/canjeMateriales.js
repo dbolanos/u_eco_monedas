@@ -38,7 +38,7 @@ $( document ).ready(function() {
                         canjeMateriales['cantidad_items']   +=  parseInt(material['cantidad_material']);
                         canjeMateriales['total_ecomonedas'] +=  material['total_valor_item'];
                         renderCanjeMateriales();
-                        $('#cantidad_material').val(0);
+
                     }
                 })
                 .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -64,6 +64,7 @@ $( document ).ready(function() {
                 var row_table = '<tr>'+
                     '<td>'+ item['nombre_material'] +'</td>'+
                     '<td>'+ item['cantidad_material'] +'</td>'+
+                    '<td>'+ item['valor_ecomoneda'] +'</td>'+
                     '<td>'+ item['total_valor_item'] +'</td>'+
                     '<td><button type="button" class="btn btn-danger eliminar" data-key="'+key+'">'+
                     '<span class="glyphicon glyphicon-trash"></span> Eliminar'+
@@ -76,16 +77,22 @@ $( document ).ready(function() {
         $('#Tabla_Material > tbody').html(html_tbody);
         $('#total_eco_monedas').text(canjeMateriales['total_ecomonedas']);
         $('#total_materiales').text(canjeMateriales['cantidad_items']);
+        $('#cantidad_material').val(0);
+        $('#material').val(0);
 
     }
 
-    $('.eliminar').on('hidden.bs.modal', function () {
+    $(document).on('click', '.eliminar', '', function () {
         console.log('eliminando...');
-        var key = this.data("key");
-        var material = canjeMateriales['detalles_items'][key];
-        console.log(JSON.stringify(material));
+        var key = $(this).data("key");
+        //Metodo splice saca el elemento de un array, el espacio de "key" indica el indice y el 1 es la cantidad de elemento a eliminar
+        var material = canjeMateriales['detalles_items'].splice(key, 1);
 
-    })
+        canjeMateriales['cantidad_items']   -=  parseInt(material[0]['cantidad_material']);
+        canjeMateriales['total_ecomonedas'] -=  material[0]['total_valor_item'];
+        renderCanjeMateriales();
+    });
+
 
 
     $('#canjear_materiales').on('click', function () {
