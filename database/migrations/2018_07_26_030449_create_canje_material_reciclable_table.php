@@ -18,8 +18,8 @@ class CreateCanjeMaterialReciclableTable extends Migration
             $table->dateTime('fecha_canje');
             $table->integer('centro_acopio_id')->unsigned();
             $table->foreign('centro_acopio_id')->references('id')->on('centro_acopios');
-            $table->integer('clientes_id')->unsigned();
-            $table->foreign('clientes_id')->references('id')->on('clientes');
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->decimal('total_eco_monedas');

@@ -29,6 +29,7 @@
                             <h4 class="card-title">Seleccione los materiales y la cantidad</h4>
                             <div class="form-group">
                                 <select id="material" name="material" class="custom-select">
+                                    <option value="0">Seleccione Material</option>
                                     @foreach($materiales as $mat)
                                         <option value="{{ $mat->id }}">{{ $mat->nombre }}</option>
                                     @endforeach

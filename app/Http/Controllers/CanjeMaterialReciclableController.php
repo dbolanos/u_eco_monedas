@@ -20,20 +20,21 @@ class CanjeMaterialReciclableController extends Controller
 
     public function guardarCanjeMaterial(Request $request){
 
-            $canje_materiales = new CanjeMaterialReciclable();
-            $fecha_actual = new \DateTime();
-
-            $detalles = $request->detalles;
+            $canje_materiales   = new CanjeMaterialReciclable();
+            $fecha_actual       = new \DateTime();
+            $detalles           = $request->detalles;
 
             $canje_materiales->user_id              = $request->usuario_id;
-            $canje_materiales->clientes_id          = $request->cliente_id;
+            $cliente                                = Cliente::find($request->cliente_id);
+            $cliente->eco_monedas_disponibles       += $detalles['total_ecomonedas'];
+            $canje_materiales->cliente()->associate($cliente);
             $canje_materiales->centro_acopio_id     = $request->centro_acopio_id;
             $canje_materiales->total_eco_monedas    = $detalles['total_ecomonedas'];
             $canje_materiales->detalles             = json_encode($detalles['detalles_items']);
-
-            $canje_materiales->fecha_canje = $fecha_actual->format('Y-m-d H:i:s');
+            $canje_materiales->fecha_canje          = $fecha_actual->format('Y-m-d H:i:s');
 
             $canje_materiales->save();
+            $cliente->save();
 
             return json_encode('Canje registrado, Id: '. $canje_materiales->id);
 

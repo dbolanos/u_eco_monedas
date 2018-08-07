@@ -14,8 +14,9 @@ $( document ).ready(function() {
     $('#agregar_material').on('click', function () {
         material            = $('#material').val();
         cantidad_material   = $('#cantidad_material').val();
+        material_id         = $('#material').val();
 
-        if(cantidad_material > 0 ){
+        if(cantidad_material > 0 && material_id > 0){
 
             $.ajax({
                 // En data puedes utilizar un objeto JSON, un array o un query string
@@ -37,6 +38,7 @@ $( document ).ready(function() {
                         canjeMateriales['cantidad_items']   +=  parseInt(material['cantidad_material']);
                         canjeMateriales['total_ecomonedas'] +=  material['total_valor_item'];
                         renderCanjeMateriales();
+                        $('#cantidad_material').val(0);
                     }
                 })
                 .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -48,7 +50,7 @@ $( document ).ready(function() {
 
         }
         else{
-            alert('Debe ingresar una cantidad de materiales');
+            alert('Verifica tus datos, en materiales');
         }
     })
 
@@ -63,7 +65,9 @@ $( document ).ready(function() {
                     '<td>'+ item['nombre_material'] +'</td>'+
                     '<td>'+ item['cantidad_material'] +'</td>'+
                     '<td>'+ item['total_valor_item'] +'</td>'+
-                    '<td><a href="'+ key +'" class="eliminar">Eliminar</a></td>'+
+                    '<td><button type="button" class="btn btn-danger eliminar" data-key="'+key+'">'+
+                    '<span class="glyphicon glyphicon-trash"></span> Eliminar'+
+                    '</button></td>'+
                     '</tr>';
                 html_tbody    += row_table;
             });
@@ -74,6 +78,14 @@ $( document ).ready(function() {
         $('#total_materiales').text(canjeMateriales['cantidad_items']);
 
     }
+
+    $('.eliminar').on('hidden.bs.modal', function () {
+        console.log('eliminando...');
+        var key = this.data("key");
+        var material = canjeMateriales['detalles_items'][key];
+        console.log(JSON.stringify(material));
+
+    })
 
 
     $('#canjear_materiales').on('click', function () {
