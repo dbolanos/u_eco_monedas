@@ -82,6 +82,7 @@
                     </a>
                 </li>
                 @endpermission
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">
@@ -89,6 +90,12 @@
                     </a>
                     <div class="dropdown-menu" x-placement="bottom-start"
                          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                        @role('cliente')
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-coins"></i> Ecomonedas: {{ Auth::user()->cliente->eco_monedas_disponibles }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        @endrole
                         <a class="dropdown-item" href="{{route('cambiar_contrasena.usuario')}}"><i
                                     class="fas fa-key"></i> Cambiar Contraseña</a>
                         <div class="dropdown-divider"></div>

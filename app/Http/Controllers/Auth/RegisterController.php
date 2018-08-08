@@ -86,6 +86,7 @@ class RegisterController extends Controller
         $cliente->direccion_exacta          = $data['direccion'];
         $cliente->eco_monedas_disponibles   = 0;
         $cliente->eco_monedas_gastadas      = 0;
+        $cliente->user_id                   = $user->id;
 
         $cliente->save();
 

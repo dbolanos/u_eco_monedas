@@ -19,6 +19,8 @@ class CreateClientesTable extends Migration
             $table->string('correo');
             $table->string('telefono');
             $table->string('direccion_exacta');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->decimal('eco_monedas_disponibles');
             $table->decimal('eco_monedas_gastadas');
             $table->timestamps();

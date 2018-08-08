@@ -138,6 +138,7 @@ $( document ).ready(function() {
                                                 '</div>');
                             canjeMateriales = {cantidad_items : 0, total_ecomonedas : 0, detalles_items : []};
                             renderCanjeMateriales();
+                            $('body,html').animate({scrollTop : 0}, 500);
                         }
                     })
                     .fail(function( jqXHR, textStatus, errorThrown ) {

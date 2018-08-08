@@ -17,5 +17,13 @@ class Cliente extends Model
         return $this->belongsTo('App\CanjeCupon');
     }
 
+    /**
+     * Get the user record associated with the client
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 
 }

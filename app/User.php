@@ -37,4 +37,12 @@ class User extends Authenticatable
     public function centroAcopio(){
         return $this->belongsTo('App\CentroAcopio');
     }
+
+    /**
+     * Get the client that owns the user.
+     */
+    public function cliente()
+    {
+        return $this->hasOne('App\Cliente');
+    }
 }
