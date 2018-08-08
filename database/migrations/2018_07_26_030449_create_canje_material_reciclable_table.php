@@ -26,6 +26,8 @@ class CreateCanjeMaterialReciclableTable extends Migration
             $table->text('detalles');
             $table->timestamps();
         });
+        //Cambiar el indice del auto_increment, para que inicie en 1000
+        DB::update("ALTER TABLE canje_material_reciclable AUTO_INCREMENT = 1000;");
     }
 
     /**

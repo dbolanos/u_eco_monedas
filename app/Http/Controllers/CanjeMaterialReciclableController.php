@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Cliente;
 use App\MaterialReciclable;
-use App\CanjeMaterialReciclable;
 use Illuminate\Http\Request;
+use App\CanjeMaterialReciclable;
+use Illuminate\Support\Facades\Auth;
+
 
 class CanjeMaterialReciclableController extends Controller
 {
@@ -24,7 +26,7 @@ class CanjeMaterialReciclableController extends Controller
             $fecha_actual       = new \DateTime();
             $detalles           = $request->detalles;
 
-            $canje_materiales->user_id              = $request->usuario_id;
+            $canje_materiales->user_id              = Auth::id();
             $cliente                                = Cliente::find($request->cliente_id);
             $cliente->eco_monedas_disponibles       += $detalles['total_ecomonedas'];
             $canje_materiales->cliente()->associate($cliente);

@@ -60,9 +60,14 @@ Route::get('admin', function () {
 })->name('eco.admin');
 
 
+//Billetera Virtual
+Route::group(['prefix' => 'billetera-virtual','middleware' => ['auth', 'role:cliente']], function () {
+    Route::get('index',                     ['as' => 'bv.index'                     , 'uses'    => 'BilleteraVirtualController@getIndex']);
+});
+
 //Canje Material Reciclable
 Route::group(['prefix' => 'canje-material','middleware' => ['auth', 'permission:materiales_reciclables']], function () {
-    Route::get('index',                     ['as' => 'canje_material.index'     , 'uses'    => 'CanjeMaterialReciclableController@getIndexCanjeMaterial']);
+    Route::get('index',                     ['as' => 'canje_material.index'         , 'uses'    => 'CanjeMaterialReciclableController@getIndexCanjeMaterial']);
     Route::get('get-material',              ['as' => 'eco.get_material'             , 'uses'    => 'MaterialesController@getMaterial']);
     Route::post('guardar-canje-material',   ['as' => 'eco.guardar_canje_material'   , 'uses'    => 'CanjeMaterialReciclableController@guardarCanjeMaterial']);
 

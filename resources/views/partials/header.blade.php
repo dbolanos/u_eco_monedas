@@ -49,10 +49,12 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @permission(['materiales_reciclables'])
-                        <a class="dropdown-item" href="{{route('canje_material.index')}}"><i class="fas fa-boxes"></i> Materiales Reciclables</a>
+                        <a class="dropdown-item" href="{{route('canje_material.index')}}"><i class="fas fa-boxes"></i>
+                            Materiales Reciclables</a>
                         @endpermission
                         @permission(['cupones_canje'])
-                        <a class="dropdown-item" href="{{route('eco.canjecupones')}}"><i class="fas fa-shopping-cart"></i>
+                        <a class="dropdown-item" href="{{route('eco.canjecupones')}}"><i
+                                    class="fas fa-shopping-cart"></i>
                             Cupones</a>
                         @endpermission
                     </div>
@@ -91,8 +93,16 @@
                     <div class="dropdown-menu" x-placement="bottom-start"
                          style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                         @role('cliente')
+
+                        <a class="dropdown-item" href="{{ route('bv.index') }}">
+                            <i class="fas fa-wallet"></i>
+                            Billetera Virtual
+                        </a>
+                        <div class="dropdown-divider"></div>
+
                         <a class="dropdown-item" href="#">
-                            <i class="fas fa-coins"></i> Ecomonedas: {{ Auth::user()->cliente->eco_monedas_disponibles }}
+                            <i class="fas fa-coins"></i>
+                            Ecomonedas: {{ Auth::user()->cliente->eco_monedas_disponibles }}
                         </a>
                         <div class="dropdown-divider"></div>
                         @endrole

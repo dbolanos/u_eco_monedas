@@ -12,15 +12,14 @@ $( document ).ready(function() {
     }
 
     $('#agregar_material').on('click', function () {
-        material            = $('#material').val();
-        cantidad_material   = $('#cantidad_material').val();
-        material_id         = $('#material').val();
+        material_seleccionado   = $('#material').val();
+        cantidad_material       = $('#cantidad_material').val();
 
-        if(cantidad_material > 0 && material_id > 0){
+        if(cantidad_material > 0 && material_seleccionado > 0){
 
             $.ajax({
                 // En data puedes utilizar un objeto JSON, un array o un query string
-                data: {"id_material" : material},
+                data: {"id_material" : material_seleccionado},
                 //Cambiar a type: POST si necesario
                 type: "GET",
                 // Formato de datos que se espera en la respuesta
@@ -31,7 +30,7 @@ $( document ).ready(function() {
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
                         material = {id_material : data['id'], nombre_material : data['nombre'], ruta_imagen: data['ruta_imagen'],
-                            valor_ecomoneda : data['valor_ecomoneda'], cantidad_material : cantidad_material,
+                            valor_ecomoneda : data['valor_ecomoneda'], cantidad_material : parseInt(cantidad_material),
                             total_valor_item : (data['valor_ecomoneda'] * cantidad_material)
                         };
                         canjeMateriales['detalles_items'].push(material);
@@ -58,14 +57,13 @@ $( document ).ready(function() {
                                     'Verifica tus datos, en la seccion de materiales'+
                                 '</div>');
         }
-    })
+    });
 
     function renderCanjeMateriales(){
         var html_tbody = '';
 
         if(canjeMateriales['cantidad_items'] > 0){
-            // var detalles_items.push(canjeMateriales['detalles_items']);
-            // console.log(detalles_items);
+
             $.each(canjeMateriales['detalles_items'], function( key, item ) {
                 var row_table = '<tr>'+
                     '<td>'+ item['nombre_material'] +'</td>'+
@@ -105,10 +103,9 @@ $( document ).ready(function() {
         console.log('Canjenado...');
 
         var cliente             = $('#cliente').val();
-        var usuario             = $('#usuario_id').val();
         var centro_acopio_id    = $('#id_centro_acopio').val();
 
-        if(cliente != null){
+        if(cliente > 0){
 
             if(canjeMateriales['cantidad_items'] > 0){
 
@@ -118,7 +115,7 @@ $( document ).ready(function() {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     // En data puedes utilizar un objeto JSON, un array o un query string
-                    data: {"detalles" : canjeMateriales, "cliente_id" : cliente, "centro_acopio_id" : centro_acopio_id, "usuario_id" : usuario},
+                    data: {"detalles" : canjeMateriales, "cliente_id" : cliente, "centro_acopio_id" : centro_acopio_id},
                     //Cambiar a type: POST si necesario
                     type: "POST",
                     // Formato de datos que se espera en la respuesta
@@ -138,6 +135,7 @@ $( document ).ready(function() {
                                                 '</div>');
                             canjeMateriales = {cantidad_items : 0, total_ecomonedas : 0, detalles_items : []};
                             renderCanjeMateriales();
+                            $('#cliente').val(0);
                             $('body,html').animate({scrollTop : 0}, 500);
                         }
                     })
@@ -153,6 +151,7 @@ $( document ).ready(function() {
 
             }
             else{
+                console.log('Error, no hay materiales en la transaccion');
                 $('.msg_alerts').html('<div class="alert alert-warning" role="alert">'+
                                         '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
                                         'No se han encontrado materiales en el canje'+
@@ -160,12 +159,13 @@ $( document ).ready(function() {
             }
         }
         else{
+            console.log('Error, no esta el cliente seleccionado');
             $('.msg_alerts').html('<div class="alert alert-warning" role="alert">'+
                                     '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
                                     'No se ha seleccionado el cliente'+
                                 '</div>');
         }
 
-    })
+    });
 
 });

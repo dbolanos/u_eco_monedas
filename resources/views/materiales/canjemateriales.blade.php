@@ -14,12 +14,12 @@
                 <div class="form-group">
                     <label for="usuario"> <i class="fas fa-user-tie"></i> Clientes</label>
                     <select id="cliente" name="cliente" class="custom-select">
+                        <option value="0">Seleccionar Cliente</option>
                         @foreach($clientes as $cli)
                             <option value="{{ $cli->id }}">{{ $cli->nombre_completo }}</option>
                         @endforeach
                     </select>
                 </div>
-                <input type="hidden" id="usuario_id" value="{{Auth::id()}}">
                 <input type="hidden" id="id_centro_acopio" value="{{ Auth::user()->centroAcopio->id  }}">
                 <input type="hidden" name="array_canje_materiales" id="array_canje_materiales" value=""></input>
             </div>
@@ -79,7 +79,7 @@
     <div class="col-md-4">
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <i class="fas fa-money-bill-wave"> Total Ecomonedas:</i>
+                <i class="fas fa-coins"> Total Ecomonedas:</i>
                 <span id="total_eco_monedas" class="badge badge-primary badge-pill">0</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
