@@ -20,6 +20,10 @@
                     <i class="fas fa-chart-line"> Eco-monedas Gastadas: </i>
                     <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ $cliente->eco_monedas_gastadas }}</span>
                 </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-donate"></i> Eco-monedas Generadas en total: </i>
+                    <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ ($cliente->eco_monedas_gastadas + $cliente->eco_monedas_disponibles) }}</span>
+                </a>
             </div>
         </div>
     </div>
