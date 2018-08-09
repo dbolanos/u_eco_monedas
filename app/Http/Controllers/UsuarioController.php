@@ -15,10 +15,30 @@ class UsuarioController extends Controller
     //
     public function getIndexUsuario()
     {
-        //No retornara el usuario Administrador
-        $usuarios = User::all();
+        //Default filtro (Todos)
+        $role_id = 0;
+        $usuarios = User::paginate(5);
+        //Tomar todos los roles excepto el de administrador
+        $roles = Role::all()->except(1);
 
-        return view('admin.usuarios.index', compact('usuarios'));
+        return view('admin.usuarios.index', compact('usuarios','roles'));
+    }
+
+    public function filtroRolUsuario(Request $request){
+        $role_id = $request->role_filtro;
+        $roles = Role::all()->except(1);
+
+        if($role_id != 0){
+            //      $users = User::withRole('admin_centros_acopio')->get();
+            $usuarios = User::whereHas('roles', function ($query) use($role_id){
+                $query->where('id', $role_id);
+            })->paginate(5);
+        }
+        else{
+            $usuarios = User::paginate(5);
+        }
+
+        return view('admin.usuarios.index', compact('usuarios','roles', 'role_id'));
     }
 
     public function getCrearUsuario()
@@ -66,16 +86,21 @@ class UsuarioController extends Controller
     {
         $usuario = User::find($id);
 
-        //Obtener todos los roles excepto el de cliente y administrador (Id = 3 y Id = 1)
-        $roles = Role::all()->except([1, 3]);
+        if($usuario->hasRole(['admin'])){
+            $roles = Role::where('id',1)->get();
+            $centros_acopio = CentroAcopio::where('id', 1)->get();
+        }else if($usuario->hasRole(['cliente'])){
+            $roles = Role::where('id',3)->get();
+            $centros_acopio = CentroAcopio::where('id', 1)->get();
+        }
+        else{
+            //Obtener todos los roles excepto el de cliente y administrador (Id = 3 y Id = 1)
+            $roles = Role::all()->except([1, 3]);
 
-
-        //Except el centro acopio general, que esta reservado para los cliente y el admin
-        $centros_acopio = CentroAcopio::all()->except([1]);
+            $centros_acopio = CentroAcopio::all()->except([1]);
+        }
 
         return view('admin.usuarios.edit', ['usuario'=> $usuario, 'roles' => $roles, 'centros_acopio' => $centros_acopio]);
-
-
     }
 
     public function actualizarUsuario(Request $request)

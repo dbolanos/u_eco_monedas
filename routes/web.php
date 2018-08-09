@@ -81,6 +81,7 @@ Route::group(['prefix' => 'usuario','middleware' => ['auth', 'permission:admin_u
     Route::post('crear',            ['as' => 'crear.usuario'            , 'uses'    => 'UsuarioController@crearUsuario']);
     Route::get('editar/{id}',       ['as' => 'editar.usuario'           , 'uses'    => 'UsuarioController@getUsuarioEditar']);
     Route::post('actualizar',       ['as' => 'actualizar.usuario'       , 'uses'    => 'UsuarioController@actualizarUsuario']);
+    Route::post('filtro-rol',       ['as' => 'filtro-rol.usuario'       , 'uses'    => 'UsuarioController@filtroRolUsuario']);
 });
 
 

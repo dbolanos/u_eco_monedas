@@ -6,33 +6,39 @@
     <div class="row">
         <div class="col-md-6">
             <h2>Billetera Virtual</h2>
-            <p class="text-info"><i class="fas fa-user-tie"></i> Cliente: {{ $cliente->nombre_completo  }}</p>
+            <h4 class="text-info"><i class="fas fa-user-tie"></i> Cliente: {{ $cliente->nombre_completo  }}</h4>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="fas fa-coins"> Eco-monedas Disponibles: </i>
-                    <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ $cliente->eco_monedas_disponibles }}</span>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="fas fa-chart-line"> Eco-monedas Gastadas: </i>
-                    <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ $cliente->eco_monedas_gastadas }}</span>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="fas fa-donate"></i> Eco-monedas Generadas en total: </i>
-                    <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ ($cliente->eco_monedas_gastadas + $cliente->eco_monedas_disponibles) }}</span>
-                </a>
+
+            <div class="card border-secondary mb-3" style="max-width: 40rem;">
+                <div class="card-header">Eco-Monedas</div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fas fa-coins"> Eco-monedas Disponibles: </i>
+                            <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ $cliente->eco_monedas_disponibles }}</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fas fa-chart-line"> Eco-monedas Gastadas: </i>
+                            <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ $cliente->eco_monedas_gastadas }}</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fas fa-donate"></i> Eco-monedas Generadas en total: </i>
+                            <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ ($cliente->eco_monedas_gastadas + $cliente->eco_monedas_disponibles) }}</span>
+                        </a>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
-    <br>
 
     <div class="row">
         <div class="col-md-6">
             <div class="card border-secondary mb-3" style="max-width: 40rem;">
-                <div class="card-header">Canje de Materiales Facturas</div>
+                <div class="card-header"><h5 class="text-success">Canje de Materiales Facturas</h5></div>
                 <div class="card-body">
                     <table class="table table-hover">
                         <thead>
@@ -115,13 +121,12 @@
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
             </div>
+
         </div>
     </div>
 
 
 </div>
-
-
 
 
 
