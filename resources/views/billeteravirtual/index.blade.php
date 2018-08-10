@@ -55,7 +55,7 @@
                                 <th scope="row">{{$canje->id}}</th>
                                 <td>{{$canje->fecha_canje}}</td>
                                 <td>{{$canje->total_eco_monedas}}</td>
-                                <td><button type="button" class="btn btn-outline-success">Ver Detalles</button></td>
+                                <td><a href="{{route('eco.detalle_canjes_materiales', $canje->id)}}" class="btn btn-outline-success">Ver Detalles</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -67,7 +67,7 @@
                             {{ $canjes_materiales->links() }}
                         </div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-outline-info">Ver todos</button>
+                            <a href="{{ route('eco.all_canjes_materiales_usuario') }}" class="btn btn-outline-info">Ver todos</a>
                         </div>
                     </div>
                 </div>

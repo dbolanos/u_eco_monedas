@@ -42,6 +42,20 @@ class CanjeMaterialReciclableController extends Controller
 
     }
 
+    public function mostrarTodosCanjesMaterialReciclable(){
+        $cliente            = Cliente::find(Auth::user()->cliente->id);
+        $canjes_materiales  = CanjeMaterialReciclable::where('cliente_id', $cliente->id)->paginate(10);
+
+        return view('materiales.canjeFacturas', compact('cliente', 'canjes_materiales'));
+    }
+
+    public function detalleCanjesMaterialReciclable($id){
+        $canje = CanjeMaterialReciclable::find($id);
+
+//        dd($canje->detalles, json_decode($canje->detalles));
+        return view('materiales.canjeDetalleFactura', compact('canje'));
+    }
+
 
 
 

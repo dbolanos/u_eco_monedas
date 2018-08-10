@@ -62,7 +62,9 @@ Route::get('admin', function () {
 
 //Billetera Virtual
 Route::group(['prefix' => 'billetera-virtual','middleware' => ['auth', 'role:cliente']], function () {
-    Route::get('index',                     ['as' => 'bv.index'                     , 'uses'    => 'BilleteraVirtualController@getIndex']);
+    Route::get('index',                         ['as' => 'bv.index'                             , 'uses'    => 'BilleteraVirtualController@getIndex']);
+    Route::get('all-canjes-materiales-usuario', ['as' => 'eco.all_canjes_materiales_usuario'    , 'uses'    => 'CanjeMaterialReciclableController@mostrarTodosCanjesMaterialReciclable']);
+    Route::get('detalle-canje-materiales/{id}', ['as' => 'eco.detalle_canjes_materiales'        , 'uses'    => 'CanjeMaterialReciclableController@detalleCanjesMaterialReciclable']);
 });
 
 //Canje Material Reciclable
