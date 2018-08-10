@@ -92,8 +92,9 @@ Route::get('cambiar-contrasena',    ['as' => 'cambiar_contrasena.usuario' , 'use
 Route::post('contrasena-usuario',   ['as' => 'contrasena.usuario'         , 'uses'  => 'UsuarioController@contrasenaUsuario'])->middleware(['auth', 'permission:cambio_contrasena']);
 
 // Crear Usuario y Cliente
-Route::get('cliente-registro',      ['as' => 'cliente.registro'         , 'uses'    => 'ClienteController@clienteRegistro']);
-
+Route::get('cliente-registro',      ['as' => 'cliente.registro'           , 'uses'  => 'ClienteController@clienteRegistro']);
+//Lista Clientes
+Route::get('lista-clientes',        ['as' => 'lista.clientes'             , 'uses'  => 'ClienteController@mostrarTodosClientes'])->middleware('auth', 'permission:admin');
 
 Auth::routes();
 

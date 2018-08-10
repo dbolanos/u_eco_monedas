@@ -21,4 +21,10 @@ class ClienteController extends Controller
         return view('auth.register', ['roles'=>$roles,'centros_acopio' => $centros_acopio]);
     }
 
+    public function mostrarTodosClientes(){
+        $clientes = Cliente::paginate(8);
+
+        return view('admin.clientes.index', compact('clientes'));
+    }
+
 }

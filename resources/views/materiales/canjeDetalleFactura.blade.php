@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action">
-                                <i class="fas fa-coins"> Total Eco-monedas : </i>
+                                <i class="fas fa-coins"> Total Eco-monedas: </i>
                                 <span id="total_eco_monedas" class="badge badge-info badge-pill">{{ $canje->total_eco_monedas }}</span>
                             </a>
                             <a href="#" class="list-group-item list-group-item-action">
@@ -27,10 +27,6 @@
                                 <i class="fas fa-building"> Centro Acopio: </i>
                                 <span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ $canje->centroAcopio->nombre }}</span>
                             </a>
-                            {{--<a href="#" class="list-group-item list-group-item-action">--}}
-                                {{--<i class="fas fa-user-circle"></i> Usuario: </i>--}}
-                                {{--<span id="total_eco_monedas" class="badge badge-primary badge-pill">{{ $canje->usuario->name }}</span>--}}
-                            {{--</a>--}}
                         </div>
                     </div>
                 </div>
@@ -55,7 +51,6 @@
                             <tbody>
 
                             @foreach(json_decode($canje->detalles) as $detalle)
-                                {{--{{dd($detalle)}}--}}
                                 <tr>
                                     <th scope="row">{{$detalle->nombre_material}}</th>
                                     <td>{{$detalle->valor_ecomoneda}}</td>

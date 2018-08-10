@@ -37,6 +37,8 @@
                         @permission(['admin_usuarios'])
                         <a class="dropdown-item" href="{{route('usuario.index')}}"><i class="fas fa-users"></i> Usuarios</a>
                         @endpermission
+                        <a class="dropdown-item" href="{{route('lista.clientes')}}"><i class="fas fa-user-tie"></i>
+                            Lista de Clientes</a>
                     </div>
                 </li>
                 @endpermission

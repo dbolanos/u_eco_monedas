@@ -131,7 +131,7 @@ $( document ).ready(function() {
                                                     '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
                                                     '<h4 class="alert-heading">Canje Materiales Exitoso!!</h4>'+
                                                     '<p>El canje se ha llevado con exito. Este es el id de tu factura: '+ data +' </p>'+
-                                                    '<p class="mb-0"><a href="#" class="alert-link">Presiona aqui para ver el recibo</a></p>'+
+                                                    '<p class="mb-0"><a href="'+document.location.origin+'/detalle-canje-materiales/'+data+'" class="alert-link">Presiona aqui para ver el recibo</a></p>'+
                                                 '</div>');
                             canjeMateriales = {cantidad_items : 0, total_ecomonedas : 0, detalles_items : []};
                             renderCanjeMateriales();

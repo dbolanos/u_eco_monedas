@@ -4,10 +4,11 @@
 
 </br>
 <div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <h1 class="display-4 text-success"><i class="fas fa-coins"> Eco-monedas! </i> </h1>
+  <p class="lead">Te gustaría hablar con un experto sobre tu situación actual?.</p>
   <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <p>Envianos un correo al eco.monedascr@test.test y un agente de nuestro equipo lo atendera.</p>
+  <p>Conoce mas de como reciclar con <strong>Eco-monedas</strong>. Gracias por preferir nuestra plataforma</p>
 </div>
 </br>
 @endsection
