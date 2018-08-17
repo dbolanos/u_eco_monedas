@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CentroAcopio;
 use App\Cliente;
 use App\MaterialReciclable;
 use Illuminate\Http\Request;
@@ -14,9 +15,13 @@ class CanjeMaterialReciclableController extends Controller
     //
 
     public function getIndexCanjeMaterial(){
-        $materiales = MaterialReciclable::all();
-        $clientes   = Cliente::all();
-        return view('materiales.canjemateriales',['materiales'=>$materiales,'clientes'=>$clientes]);
+        $centro_acopio = CentroAcopio::find(Auth::user()->centroAcopio->id);
+        if($centro_acopio->estado){
+            $materiales = MaterialReciclable::all();
+            $clientes   = Cliente::all();
+            return view('materiales.canjemateriales',['materiales'=>$materiales,'clientes'=>$clientes]);
+        }
+        return view('errors.centroAcopioDesactivado');
     }
 
 
