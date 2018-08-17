@@ -2,6 +2,10 @@
 @section('titulo','Materiales')
 @section('contenido')
 </br>
+<div class="card border-primary mb-3" style="max-width: 60rem;">
+    <div class="card-header"> <h2> <i class="fab fa-creative-commons-remix"> Materiales </i></h2></div>
+    <div class="card-body">
+        <h4 class="card-title"></h4>
   @foreach($materiales->chunk(3) as $materialesChunk)
       <div class="row">
           @foreach($materialesChunk as $materiales)
@@ -23,4 +27,7 @@
       </div>
     </br>
   @endforeach
+    </div>
+</div>
+
 @endsection

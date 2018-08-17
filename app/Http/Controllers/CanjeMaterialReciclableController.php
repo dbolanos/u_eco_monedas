@@ -19,7 +19,7 @@ class CanjeMaterialReciclableController extends Controller
         if($centro_acopio->estado){
             $materiales = MaterialReciclable::all();
             $clientes   = Cliente::all();
-            return view('materiales.canjemateriales',['materiales'=>$materiales,'clientes'=>$clientes]);
+            return view('materiales.canjeMateriales',['materiales'=>$materiales,'clientes'=>$clientes]);
         }
         return view('errors.centroAcopioDesactivado');
     }
