@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('ecomonedas.index');
 })->name('eco.home');
 
-Route::get('centros', 'CentroAcopioController@getIndex')->name('eco.centros');
+Route::get('centros'                , 'CentroAcopioController@getIndex')->name('eco.centros');
+Route::get('grafico-centro-acopio'  , 'CentroAcopioController@getGrafico')->name('eco.get-grafico-centros');
 
 Route::group(['prefix'=>'admincentros','middleware' => ['auth', 'permission:centro_acopio']], function(){
   Route::get('', ['uses'=>'CentroAcopioController@getAdminIndex'])->name('centros.index');
