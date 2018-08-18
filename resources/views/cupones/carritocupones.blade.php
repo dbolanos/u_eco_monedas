@@ -3,7 +3,25 @@
 @section('contenido')
 </br>
 <legend><i class="fas fa-clipboard-list"></i> Resumen del Carrito de Compras</legend>
+
+@if(Session::has('info'))
+        <div class="row">
+            <div class="col-md-12">
+                <p class="alert alert-info">{{Session::get('info')}}</p>
+            </div>
+        </div>
+@endif
+
+@if(Session::has('error'))
+        <div class="row">
+            <div class="col-md-12">
+                <p class="alert alert-danger">{{Session::get('error')}}</p>
+            </div>
+        </div>
+@endif
+
   @if(Session::has('cart'))
+
       <div class="row">
           <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
               <ul class="list-group">
@@ -37,7 +55,7 @@
       <hr>
       <div class="row">
           <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-              <a type="button" href="#" class="btn btn-success">Canjear</a>
+              <a type="button" href="{{route('eco.checkout')}}" class="btn btn-success">Checkout</a>
           </div>
       </div>
   @else
@@ -47,4 +65,5 @@
           </div>
       </div>
   @endif
+
 @endsection

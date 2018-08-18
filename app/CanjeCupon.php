@@ -9,9 +9,11 @@ class CanjeCupon extends Model
     //
     protected $guarded  = 'id';
 
-    public function cupon(){
-        return $this->belongTo('App\Cupon');
-    }
+    protected $table = 'canje_cupon';
+
+    //public function cupon(){
+        //return $this->belongTo('App\Cupon');
+    //}
 
     public function cliente(){
         return $this->belongsTo('App\Cliente');

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Cupon;
 use App\Cart;
+use App\CanjeCupon;
+use App\Cliente;
 Use Session;
+Use Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -88,6 +91,42 @@ class CuponesController extends Controller
       $oldCart = Session::get('cart');
       $cart = new Cart($oldCart);
       return view('cupones.carritocupones', ['cupones' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+  }
+
+  public function getCheckout()
+  {
+      if (!Session::has('cart')) {
+          return view('cupones.carritocupones');
+      }
+      $oldCart = Session::get('cart');
+      $cart = new Cart($oldCart);
+      $total = $cart->totalPrice;
+      return view('cupones.checkoutcupones', ['cupones' => $cart->items, 'total' => $total]);
+  }
+
+  public function postCheckout(Request $request)
+  {
+      if (!Session::has('cart')) {
+          return redirect()->route('shop.shoppingCart');
+      }
+      $oldCart = Session::get('cart');
+      $cart = new Cart($oldCart);
+      $mondisp = Auth::user()->cliente()->first()->eco_monedas_disponibles;
+
+      if ($mondisp >= floatval($cart->totalPrice)) {
+        $order = new CanjeCupon();
+        $cliente = Cliente::where('user_id',Auth::user()->id)->first();
+        $cliente->eco_monedas_disponibles = ($mondisp - floatval($cart->totalPrice));
+        $order->cliente()->associate($cliente);
+        $order->cart = serialize($cart);
+        $order->save();
+        $cliente->save();
+      }else {
+        return redirect()->route('eco.shoppingCart')->with('error', '¡Eco-Monedas insuficientes para canjear cupones!');
+      }
+
+      Session::forget('cart');
+      return redirect()->route('eco.canjecupones')->with('success', '¡Cupones Canjeados!');      
   }
 
 }

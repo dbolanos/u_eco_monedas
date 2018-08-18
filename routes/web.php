@@ -40,9 +40,14 @@ Route::group(['prefix'=>'adminmateriales','middleware' => ['auth', 'permission:m
   Route::post('edit', ['uses' => 'MaterialesController@MaterialesAdminEdit','as' => 'materiales.update']);
 });
 
-Route::get('canjecupones', 'CuponesController@getCanjeIndex')->name('eco.canjecupones');
-Route::get('/add-to-cart/{id}', 'CuponesController@getAddToCart')->name('eco.addToCart');
-Route::get('/shopping-cart', 'CuponesController@getCart')->name('eco.shoppingCart');
+
+Route::group(['prefix'=>'canjecupones','middleware' => ['auth', 'permission:carrito_compras']], function(){
+  Route::get('', ['uses'=>'CuponesController@getCanjeIndex'])->name('eco.canjecupones');
+  Route::get('add-to-cart/{id}', ['uses'=>'CuponesController@getAddToCart'])->name('eco.addToCart');
+  Route::get('shopping-cart', ['uses'=>'CuponesController@getCart'])->name('eco.shoppingCart');
+  Route::get('checkout', ['uses'=>'CuponesController@getCheckout'])->name('eco.checkout');
+  Route::post('checkout', ['uses'=>'CuponesController@postCheckout'])->name('eco.checkout');
+});
 
 Route::group(['prefix'=>'admincupones','middleware' => ['auth', 'permission:cupones_canje']], function(){
   Route::get('', ['uses'=>'CuponesController@getAdminIndex'])->name('cupones.index');

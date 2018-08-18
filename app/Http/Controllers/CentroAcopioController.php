@@ -80,7 +80,7 @@ class CentroAcopioController extends Controller
       //$centros_acopio = CentroAcopio::orderBy('id', 'desc')->get();
 
       $centros_resultado = DB::table('canje_material_reciclable')
-                                ->join('centro_acopio')
+                                ->join('centro_acopio');
 
       $etiquetas=[];
       foreach($centros_acopio as $centro){

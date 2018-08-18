@@ -15,13 +15,14 @@ class CreateCanjeCuponTable extends Migration
     {
         Schema::create('canje_cupon', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('fecha_canje_cupon');
-            $table->decimal('total_eco_monedas');
-            $table->dateTime('fecha_canje');
-            $table->integer('cupon_id')->unsigned();
-            $table->foreign('cupon_id')->references('id')->on('cupons');
-            $table->integer('clientes_id')->unsigned();
-            $table->foreign('clientes_id')->references('id')->on('clientes');
+            //$table->dateTime('fecha_canje_cupon');
+            //$table->decimal('total_eco_monedas');
+            //$table->dateTime('fecha_canje');
+            //$table->integer('cupon_id')->unsigned();
+            //$table->foreign('cupon_id')->references('id')->on('cupons');
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes');          
+            $table->text('cart');
             $table->timestamps();
         });
     }

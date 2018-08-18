@@ -14,7 +14,7 @@ class Cliente extends Model
     }
 
     public function canjeCupon(){
-        return $this->belongsTo('App\CanjeCupon');
+        return $this->hasMany('App\CanjeCupon');
     }
 
     /**
