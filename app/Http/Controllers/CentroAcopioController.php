@@ -9,7 +9,9 @@ use App\Provincias;
 use App\Charts\Graficos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+//Para usar el pdf
 use PDF;
+use Illuminate\Support\Facades\Storage;
 class CentroAcopioController extends Controller
 {
 
@@ -77,15 +79,22 @@ class CentroAcopioController extends Controller
   }
 
   public function generarReporte(Request $request){
-      $chart        = new Graficos();
-      $fecha_incial = date('Y-m-d H:i', strtotime($request->fecha_inicial));
+
+      $fecha_inicial = date('Y-m-d H:i', strtotime($request->fecha_inicial));
       $fecha_final  = date('Y-m-d H:i', strtotime($request->fecha_final));
 
+      $reporte = $this->crearReporte($fecha_inicial, $fecha_final);
+
+      return view('centrosacopio.generarReporte', ['chart' => $reporte['chart'], 'canje_materiales' => $reporte['canje_materiales'], 'total_ecomonedas' => $reporte['total_ecomonedas'], 'fecha_inicial' => $fecha_inicial, 'fecha_final' => $fecha_final]);
+  }
+
+  private function crearReporte($fecha_inicial, $fecha_final){
+      $chart        = new Graficos();
       $titulo="Eco-Monedas producidas por cada Centro de Acopio en un periodo";
 
       $canje_materiales = CanjeMaterialReciclable::select(DB::raw("sum(total_eco_monedas) as total"), DB::raw("centro_acopio_id"))
           ->whereNotIn('centro_acopio_id', [1])
-          ->whereBetween('fecha_canje',[$fecha_incial, $fecha_final])
+          ->whereBetween('fecha_canje',[$fecha_inicial, $fecha_final])
           ->orderBy('centro_acopio_id', 'desc')
           ->groupBy('centro_acopio_id')
           ->with('centroAcopio')
@@ -108,11 +117,19 @@ class CentroAcopioController extends Controller
       $dataset->backgroundColor(['#a9cce3', ' #a9dfbf', '#fad7a0','#c39bd3','#f9e79f','#a3e4d7', '#fadbd8', '#e59866']);
       $dataset->color(['#2980b9', '#52be80', '#f0b27a','#7d3c98', '#f4d03f','#48c9b0','#f1948a','#d35400']);
 
-      return view('centrosacopio.generarReporte', ['chart' => $chart, 'canje_materiales' => $canje_materiales, 'total_ecomonedas' => $total_ecomonedas, 'fecha_inicial' => $fecha_incial, 'fecha_final' => $fecha_final]);
+      return ['chart' => $chart, 'canje_materiales' => $canje_materiales, 'total_ecomonedas' => $total_ecomonedas, ];
   }
 
   public function descargarReporte(Request $request){
-    dd($request);
+      $fecha_inicial = date('Y-m-d H:i', strtotime($request->fecha_inicial));
+      $fecha_final  = date('Y-m-d H:i', strtotime($request->fecha_final));
+
+      $reporte = $this->crearReporte($fecha_inicial, $fecha_final);
+
+
+      $pdf = PDF::loadView('centrosacopio.pdfReporte', ['chart' => $reporte['chart'], 'canje_materiales' => $reporte['canje_materiales'], 'total_ecomonedas' => $reporte['total_ecomonedas'], 'fecha_inicial' => $fecha_inicial, 'fecha_final' => $fecha_final]);
+      //Nombre a especificar
+      return $pdf->download('centros-acopio-report-'.$fecha_inicial.'_to_'.$fecha_final.'.pdf');
   }
 
 }

@@ -16,9 +16,12 @@ Route::get('/', function () {
 })->name('eco.home');
 
 Route::get('centros'                , 'CentroAcopioController@getIndex')->name('eco.centros');
-Route::get('configurar-reporte-centro-acopio'  , 'CentroAcopioController@configurarReporte')->name('eco.configurar-reporte-centros');
-Route::post('reporte-centro-acopio'  , 'CentroAcopioController@generarReporte')->name('eco.reporte-centros');
-Route::get('descargar-reporte'  , 'CentroAcopioController@descargarReporte')->name('eco.descargar-reporte');
+//Reporte Centro Acopio
+Route::group(['prefix'=>'centro-acopio','middleware' => ['auth', 'permission:centro_acopio']], function(){
+    Route::get('configurar-reporte'  , 'CentroAcopioController@configurarReporte')->name('eco.configurar-reporte-centros');
+    Route::post('reporte'  , 'CentroAcopioController@generarReporte')->name('eco.reporte-centros');
+    Route::get('descargar-reporte'  , 'CentroAcopioController@descargarReporte')->name('eco.descargar-reporte');
+});
 
 Route::group(['prefix'=>'admincentros','middleware' => ['auth', 'permission:centro_acopio']], function(){
   Route::get('', ['uses'=>'CentroAcopioController@getAdminIndex'])->name('centros.index');
