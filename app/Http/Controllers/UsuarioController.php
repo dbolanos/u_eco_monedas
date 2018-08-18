@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Role;
+use App\Cliente;
 use App\CentroAcopio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,11 @@ class UsuarioController extends Controller
 
     public function crearUsuario(Request $request)
     {
-        //TODO Se debe de validar la informacion y verificar la contrasenna
+        $this->validate($request, [
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users',
+            'password'  => 'required|string|min:6|same:password_confirmation',
+        ]);
 
         try {
             $usuario = new User();
@@ -116,6 +121,12 @@ class UsuarioController extends Controller
             $usuario->email             = $request->email;
             $usuario->centro_acopio_id  = $request->centro_acopio;
             $usuario->roles()->sync($request->roles);
+            $cliente = Cliente::where('user_id', $request->id_usuario)->first();
+            if(!is_null($cliente)){
+                $cliente->nombre_completo = $request->name;
+                $cliente->correo          = $request->email;
+                $cliente->save();
+            }
             $mensaje                    = ['tipo_mensaje' => 'success', 'msg' => 'Usuario editado satisfactoriamente: ' . $usuario->name];
 
             if($request->cambio_contrasena == 'on'){

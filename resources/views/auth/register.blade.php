@@ -73,7 +73,7 @@
                             <label for="telefono" style="color:black" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefono" type="tel" style="border: 2px solid #555" class="form-control" name="telefono" required>
+                                <input id="telefono" type="tel" style="border: 2px solid #555" class="form-control" pattern="[0-9]{8}" placeholder="Formato: 23457654" name="telefono" required>
                             </div>
                         </div>
 

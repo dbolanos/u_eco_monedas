@@ -54,6 +54,8 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'telefono' => 'required|string|max:8',
+            'direccion' => 'required|string|min:6|max:250',
         ]);
     }
 
@@ -65,7 +67,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //TODO Validar la informacion recibida con un Validator
 
         //Este centro de acopio sera el default para cliente y el administrador
         $centro_acopio = 1;
