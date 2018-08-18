@@ -63,9 +63,6 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-md-8">
-                            {{ $canjes_materiales->links() }}
-                        </div>
                         <div class="col-md-4">
                             <a href="{{ route('eco.all_canjes_materiales_usuario') }}" class="btn btn-outline-info">Ver todos</a>
                         </div>

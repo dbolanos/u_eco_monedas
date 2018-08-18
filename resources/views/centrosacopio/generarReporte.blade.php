@@ -55,8 +55,10 @@
     <div class="card border-primary mb-3" style="max-width: 40rem;">
         <div class="card-header">Reporte</div>
         <div class="card-body">
-            <h4 class="card-title">No se ha generado ningun reporte</h4>
-            <p>No se ha encontrado ningún canje de dentro de las fechas seleccionadas</p>
+            <h4 class="card-title">No se ha generado ningun reporte <i class="fas fa-exclamation-triangle"></i>
+
+            </h4>
+            <p>No se ha encontrado ningún canje dentro de las fechas seleccionadas</p>
         </div>
         <div class="card-footer">
             <a href="{{ route('eco.configurar-reporte-centros') }}" class="btn btn-outline-info"><i class="fas fa-arrow-circle-left"></i> Configurar Reporte</a>
