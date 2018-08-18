@@ -9,7 +9,7 @@ use App\Provincias;
 use App\Charts\Graficos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-
+use PDF;
 class CentroAcopioController extends Controller
 {
 
@@ -72,27 +72,34 @@ class CentroAcopioController extends Controller
       return redirect()->route('centros.index')->with('info', 'Centro Acopio: ' . $request->input('nombre').' editado');
   }
 
-  public function getGrafico(Request $request){
-      $chart = new Graficos();
+  public function configurarReporte(){
+      return view('centrosacopio.configurarReporte');
+  }
+
+  public function generarReporte(Request $request){
+      $chart        = new Graficos();
+      $fecha_incial = date('Y-m-d H:i', strtotime($request->fecha_inicial));
+      $fecha_final  = date('Y-m-d H:i', strtotime($request->fecha_final));
 
       $titulo="Eco-Monedas producidas por cada Centro de Acopio en un periodo";
 
-      //$centros_acopio = CentroAcopio::orderBy('id', 'desc')->get();
-
-      $centros_resultado = DB::table('canje_material_reciclable')
-                                ->join('centro_acopio')
-
-      $etiquetas=[];
-      foreach($centros_acopio as $centro){
-          $etiquetas[] = $centro->nombre;
-      }
       $canje_materiales = CanjeMaterialReciclable::select(DB::raw("sum(total_eco_monedas) as total"), DB::raw("centro_acopio_id"))
-                                                        ->orderBy('centro_acopio_id', 'desc')
-                                                        ->groupBy('centro_acopio_id')
-                                                        ->get();
-      $cantidades=$canje_materiales->pluck('total');
+          ->whereNotIn('centro_acopio_id', [1])
+          ->whereBetween('fecha_canje',[$fecha_incial, $fecha_final])
+          ->orderBy('centro_acopio_id', 'desc')
+          ->groupBy('centro_acopio_id')
+          ->with('centroAcopio')
+          ->get();
 
-      dd($etiquetas, $cantidades, $chart);
+      $total_ecomonedas = 0;
+      $etiquetas=[];
+      foreach($canje_materiales as $canje){
+          $etiquetas[]      = $canje->centroAcopio->nombre;
+          $total_ecomonedas += $canje->total;
+
+      }
+
+      $cantidades=$canje_materiales->pluck('total');
 
       //labels
       $chart->labels($etiquetas);
@@ -101,7 +108,11 @@ class CentroAcopioController extends Controller
       $dataset->backgroundColor(['#a9cce3', ' #a9dfbf', '#fad7a0','#c39bd3','#f9e79f','#a3e4d7', '#fadbd8', '#e59866']);
       $dataset->color(['#2980b9', '#52be80', '#f0b27a','#7d3c98', '#f4d03f','#48c9b0','#f1948a','#d35400']);
 
-      return view('centrosacopio.grafico', ['chart' => $chart]);
+      return view('centrosacopio.generarReporte', ['chart' => $chart, 'canje_materiales' => $canje_materiales, 'total_ecomonedas' => $total_ecomonedas, 'fecha_inicial' => $fecha_incial, 'fecha_final' => $fecha_final]);
+  }
+
+  public function descargarReporte(Request $request){
+    dd($request);
   }
 
 }

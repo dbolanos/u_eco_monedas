@@ -35,7 +35,7 @@
     @auth
         @permission(['centro_acopio'])
             <div class="card-footer">
-                <a href="{{route('eco.get-grafico-centros')}}" class="btn btn-outline-info">Ver Gráfico</a>
+                <a href="{{route('eco.configurar-reporte-centros')}}" class="btn btn-outline-info">Ver Gráfico</a>
             </div>
         @endpermission
     @endauth
