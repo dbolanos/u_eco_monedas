@@ -116,6 +116,7 @@ class CuponesController extends Controller
       if ($mondisp >= floatval($cart->totalPrice)) {
         $order = new CanjeCupon();
         $cliente = Cliente::where('user_id',Auth::user()->id)->first();
+        $cliente->eco_monedas_gastadas += floatval($cart->totalPrice);
         $cliente->eco_monedas_disponibles = ($mondisp - floatval($cart->totalPrice));
         $order->cliente()->associate($cliente);
         $order->cart = serialize($cart);
@@ -126,7 +127,7 @@ class CuponesController extends Controller
       }
 
       Session::forget('cart');
-      return redirect()->route('eco.canjecupones')->with('success', '¡Cupones Canjeados!');      
+      return redirect()->route('eco.canjecupones')->with('success', '¡Cupones Canjeados!');
   }
 
 }

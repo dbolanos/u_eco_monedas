@@ -76,6 +76,9 @@ Route::group(['prefix' => 'billetera-virtual','middleware' => ['auth', 'role:cli
     Route::get('index',                         ['as' => 'bv.index'                             , 'uses'    => 'BilleteraVirtualController@getIndex']);
     Route::get('all-canjes-materiales-usuario', ['as' => 'eco.all_canjes_materiales_usuario'    , 'uses'    => 'CanjeMaterialReciclableController@mostrarTodosCanjesMaterialReciclable']);
     Route::get('detalle-canje-materiales/{id}', ['as' => 'eco.detalle_canjes_materiales'        , 'uses'    => 'CanjeMaterialReciclableController@detalleCanjesMaterialReciclable']);
+    Route::get('all-canjes-cupones-usuario', ['as' => 'eco.all_canjes_cupones_usuario'          , 'uses'    => 'CanjeCuponController@mostrarTodosCanjesCupones']);
+    Route::get('detalle-canje-cupones/{id}', ['as' => 'eco.detalle_canjes_cupones'              , 'uses'    => 'CanjeCuponController@detalleCanjesCupones']);
+    Route::get('pdf/{id}', ['as' => 'eco.descargarPDF'                                          , 'uses'    => 'CanjeCuponController@descargarPDF']);
 });
 
 //Canje Material Reciclable

@@ -34,6 +34,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\CanjeMaterialReciclable');
     }
 
+    public function canjeCupon(){
+        return $this->belongsTo('App\CanjeCupon');
+    }
+
     public function centroAcopio(){
         return $this->belongsTo('App\CentroAcopio');
     }
