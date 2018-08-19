@@ -52,6 +52,8 @@ Route::group(['prefix'=>'canjecupones','middleware' => ['auth', 'permission:carr
   Route::get('shopping-cart', ['uses'=>'CuponesController@getCart'])->name('eco.shoppingCart');
   Route::get('checkout', ['uses'=>'CuponesController@getCheckout'])->name('eco.checkout');
   Route::post('checkout', ['uses'=>'CuponesController@postCheckout'])->name('eco.checkout');
+  Route::get('reduce/{id}', ['uses'=>'CuponesController@getReduceByOne'])->name('eco.ReduceByOne');
+  Route::get('remove/{id}', ['uses'=>'CuponesController@getRemoveItem'])->name('eco.RemoveItem');
 });
 
 Route::group(['prefix'=>'admincupones','middleware' => ['auth', 'permission:cupones_canje']], function(){

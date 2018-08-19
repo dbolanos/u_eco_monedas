@@ -84,6 +84,32 @@ class CuponesController extends Controller
       return redirect()->route('eco.canjecupones');
   }
 
+  public function getReduceByOne($id) {
+      $oldCart = Session::has('cart') ? Session::get('cart') : null;
+      $cart = new Cart($oldCart);
+      $cart->reduceByOne($id);
+
+      if (count($cart->items) > 0) {
+          Session::put('cart', $cart);
+      } else {
+          Session::forget('cart');
+      }
+      return redirect()->route('eco.shoppingCart');
+  }
+
+  public function getRemoveItem($id) {
+      $oldCart = Session::has('cart') ? Session::get('cart') : null;
+      $cart = new Cart($oldCart);
+      $cart->removeItem($id);
+
+      if (count($cart->items) > 0) {
+          Session::put('cart', $cart);
+      } else {
+          Session::forget('cart');
+      }
+      return redirect()->route('eco.shoppingCart');
+  }  
+
   public function getCart() {
       if (!Session::has('cart')) {
           return view('cupones.carritocupones');
@@ -129,5 +155,4 @@ class CuponesController extends Controller
       Session::forget('cart');
       return redirect()->route('eco.canjecupones')->with('success', '¡Cupones Canjeados!');
   }
-
 }

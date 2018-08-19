@@ -36,8 +36,8 @@
                                     Acción
                                   </button>
                                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-minus-square"></i> Eliminar Unidad</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-trash-alt"></i> Eliminar Todo</a>
+                                    <a class="dropdown-item" href="{{route('eco.ReduceByOne',['id' => $cupon['item']['id']])}}"><i class="fas fa-minus-square"></i> Eliminar Unidad</a>
+                                    <a class="dropdown-item" href="{{route('eco.RemoveItem',['id' => $cupon['item']['id']])}}"><i class="fas fa-trash-alt"></i> Eliminar Todo</a>
                                   </div>
                                 </div>
                               </div>
