@@ -15,10 +15,10 @@
             <img class="d-block w-100" src="https://images.pexels.com/photos/1125298/pexels-photo-1125298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260e" width="200" height="400" alt="First slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="https://images.pexels.com/photos/414886/pexels-photo-414886.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="200" height="400" alt="Second slide">
+            <img class="d-block w-100" src="http://3innyc.com/wp-content/uploads/2014/01/red-eye-tree-frog-costa-rica.jpg" width="200" height="400" alt="Second slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="https://images.pexels.com/photos/1076807/pexels-photo-1076807.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="200" height="400" alt="Third slide">
+            <img class="d-block w-100" src="https://d3hne3c382ip58.cloudfront.net/files/uploads/bookmundi/resized/cms/arenal-volcano-in-costa-rica-1510653537-735X412.jpg" width="200" height="400" alt="Third slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
@@ -36,6 +36,7 @@
     <div class="col-lg-4">
       <h1><i class="fas fa-recycle"></i> Eco-Monedas</h1>
       <p>A través de nuestro sistema de incentivos que promuevan el reciclaje y el cambio de hábitos de consumo en los individuos y comunidades, lograremos un mejor ambiente.</p>
+      <p>EcoMonedas es un proyecto 100% costarricense el cual busca generarle muchos benefcios contribuyendo al ambiente.</p>
       <a class="btn btn-success btn-lg" href="{{route('eco.contacto')}}"><i class="fas fa-phone"></i> ¡Contáctenos!</a>
     </div>
     <!-- /.col-md-4 -->
