@@ -19,7 +19,7 @@ class CuponesController extends Controller
   }
 
   public function getAdminIndex(){
-    $cupones= Cupon::orderBy('nombre', 'asc')->get();
+    $cupones= Cupon::orderBy('nombre', 'asc')->paginate(5);
     return view('admin.cupones.index',['cupones'=>$cupones]);
   }
 
@@ -108,7 +108,7 @@ class CuponesController extends Controller
           Session::forget('cart');
       }
       return redirect()->route('eco.shoppingCart');
-  }  
+  }
 
   public function getCart() {
       if (!Session::has('cart')) {

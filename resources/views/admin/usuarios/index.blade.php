@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                
+
 
                 <div class="card">
                     <div class="card-header">
@@ -42,7 +42,7 @@
                     {{--Table--}}
                     <table class="table table-hover">
                         <thead>
-                        <tr class="table-success">
+                        <tr class="table-primary">
                             <th scope="col">Nombre</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Centro Acopio</th>
@@ -57,7 +57,7 @@
                                 <td>{{ $usuario->email }}</td>
                                 <td>{{ $usuario->centroAcopio()->first()->nombre }}</td>
                                 {{--<td>{{ $usuario->estado == 1 ? 'activo' : 'inactivo' }}</td>--}}
-                                <td> <a href="{{ route('editar.usuario', $usuario->id) }}"> Editar <i class="fas fa-user-edit"></i>  </a> </td>
+                                <td> <a class="btn btn-outline-primary" href="{{ route('editar.usuario', $usuario->id) }}"><i class="fas fa-user-edit"></i> Editar</a></td>
                             </tr>
                         @endforeach
                         </tbody>

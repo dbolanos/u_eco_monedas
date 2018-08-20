@@ -9,9 +9,9 @@
 
             <form action="{{route('eco.reporte-centros')}}" method="POST">
             <div class="card border-primary mb-3" style="max-width: 40rem;">
-                <div class="card-header">Configurar Reporte Centro Acopio</div>
+                <div class="card-header"><h2><i class="fas fa-chart-pie"></i> Generar Reporte Centro Acopio</h2></div>
                 <div class="card-body">
-                    <h4 class="card-title">Fechas Inicio - Final <i class="fas fa-calendar-alt"></i></h4>
+                    <h4 class="card-title"><i class="far fa-calendar-alt"></i> Fechas Inicio - Final</i></h4>
                         @csrf
                         <fieldset>
                             <div class="form-group row">
@@ -29,7 +29,7 @@
                         </fieldset>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-file-alt"> Generar Reporte</i></button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Generar Reporte</button>
                 </div>
             </div>
             </form>

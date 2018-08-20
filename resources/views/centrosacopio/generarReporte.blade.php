@@ -5,9 +5,9 @@
     <br>
     <div class="row justify-content-md-center">
     <div class="card border-primary mb-3" style="max-width: 60rem;">
-        <div class="card-header">Reporte</div>
+        <div class="card-header"><h2>Detalles Reporte</h2></div>
         <div class="card-body">
-            <h4 class="card-title"> Eco-Monedas producidas por Centro de Acopio De {{ $fecha_inicial }} A {{$fecha_final}} </h4>
+            <h4 class="card-title"> Eco-Monedas producidas por Centro de Acopio del {{ $fecha_inicial }} al {{$fecha_final}} </h4>
             <div class="col-md-10">
                 <div>
                     <!--Contenedor grafico-->
@@ -35,7 +35,7 @@
             </tbody>
         </table>
             {{--fin-table--}}
-        <p class="text-primary">Total de Eco-monedas: <i class="fas fa-donate"> {{$total_ecomonedas}}</i> </p>
+        <p class="text-primary"> Total de Eco-monedas: <i class="fas fa-donate"> {{$total_ecomonedas}}</i> </p>
 
         <div class="card-footer">
             <a href="{{ route('eco.configurar-reporte-centros') }}" class="btn btn-outline-info"><i class="fas fa-arrow-circle-left"></i> Configurar Reporte</a>

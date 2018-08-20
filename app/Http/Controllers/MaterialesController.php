@@ -15,7 +15,7 @@ class MaterialesController extends Controller
   }
 
   public function getAdminIndex(){
-    $materiales = MaterialReciclable::orderBy('nombre', 'asc')->get();
+    $materiales = MaterialReciclable::orderBy('nombre', 'asc')->paginate(5);
     return view('admin.materiales.index',['materiales'=>$materiales]);
   }
 
@@ -29,7 +29,7 @@ class MaterialesController extends Controller
         'nombre' => 'required|min:5',
         'archivoImagen' => 'required|image',
         'valor' => 'required',
-        'color' => 'required'
+        'color' => 'required|unique:material_reciclables,color'
     ]);
 
     $ruta=$request->file('archivoImagen')->store('images','public');
@@ -54,7 +54,9 @@ class MaterialesController extends Controller
   {
     $this->validate($request, [
       'nombre' => 'required|min:5',
-      'valor' => 'required'
+      'valor' => 'required',
+      'color' => 'required|unique:material_reciclables,color' 
+
     ]);
       $material= MaterialReciclable::find($request->input('id'));
       if(($request->file('archivoImagen')!==null) || ($request->file('archivoImagen')!="")){

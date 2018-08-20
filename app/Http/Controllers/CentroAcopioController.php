@@ -16,12 +16,13 @@ class CentroAcopioController extends Controller
 {
 
   public function getIndex(){
-    $centros = CentroAcopio::where('estado',true)->where('id','!=',1)->orderBy('provincia_id', 'asc')->paginate(4);
-    return view('centrosacopio.index',['centros'=>$centros]);
+    $centros = CentroAcopio::where('estado',true)->where('id','!=',1)->orderBy('provincia_id', 'asc')->get();
+    $provincias = Provincias::all();
+    return view('centrosacopio.index',['centros'=>$centros, 'provincias'=>$provincias]);
   }
 
   public function getAdminIndex(){
-    $centros = CentroAcopio::where('id', '!=', 1)->orderBy('provincia_id', 'asc')->get();
+    $centros = CentroAcopio::where('id', '!=', 1)->orderBy('provincia_id', 'asc')->paginate(5);
     return view('admin.centrosacopio.index',['centros'=>$centros]);
   }
 

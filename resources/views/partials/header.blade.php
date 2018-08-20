@@ -55,8 +55,7 @@
                             Materiales Reciclables</a>
                         @endpermission
                         @permission(['cupones_canje'])
-                        <a class="dropdown-item" href="{{route('eco.canjecupones')}}"><i
-                                    class="fas fa-shopping-cart"></i>
+                        <a class="dropdown-item" href="{{route('eco.canjecupones')}}"><i class="fas fa-ticket-alt"></i>
                             Cupones</a>
                         @endpermission
                     </div>

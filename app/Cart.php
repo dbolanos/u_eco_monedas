@@ -33,9 +33,9 @@ class Cart
 
     public function reduceByOne($id) {
         $this->items[$id]['qty']--;
-        $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
+        $this->items[$id]['price'] -= $this->items[$id]['item']['cantidad_ecomonedas'];
         $this->totalQty--;
-        $this->totalPrice -= $this->items[$id]['item']['price'];
+        $this->totalPrice -= $this->items[$id]['item']['cantidad_ecomonedas'];
 
         if ($this->items[$id]['qty'] <= 0) {
             unset($this->items[$id]);
@@ -46,5 +46,5 @@ class Cart
         $this->totalQty -= $this->items[$id]['qty'];
         $this->totalPrice -= $this->items[$id]['price'];
         unset($this->items[$id]);
-    }    
+    }
 }

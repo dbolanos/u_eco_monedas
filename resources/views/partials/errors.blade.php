@@ -1,4 +1,5 @@
 @if(count($errors->all()))
+</br>
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-danger">

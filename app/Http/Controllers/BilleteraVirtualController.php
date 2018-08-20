@@ -16,8 +16,9 @@ class BilleteraVirtualController extends Controller
         $cliente = Auth::user()->cliente;
 
         $canjes_materiales = CanjeMaterialReciclable::where('cliente_id', $cliente->id)->orderBy('id','desc')->take(4)->get();
+        //$canjes_materiales = CanjeMaterialReciclable::where('cliente_id', $cliente->id)->orderBy('id','desc')->paginate(2);
 
-        $canjes_cupones = CanjeCupon::where('cliente_id', $cliente->id)->orderBy('id','desc')->take(4)->get();
+        $canjes_cupones = CanjeCupon::where('cliente_id', $cliente->id)->orderBy('id','desc')->paginate(4);
         $canjes_cupones->transform(function($canje, $key) {
           $canje->cart = unserialize($canje->cart);
           return $canje;
