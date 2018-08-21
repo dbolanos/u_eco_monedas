@@ -90,26 +90,26 @@ width:150px; height:150px;
         page-break-after: auto ;
     }
 </style>
-  </head>
-  <body>
-    <main>
-      <h1  class="clearfix">
+</head>
+
+<body>
+  <main>
+    <h1 class="clearfix">
         <small>
           <span>{{date('d-m-Y')}}</span><br />
-        </small> Reporte de Cupones, Factura # {{$canje->id}}
+        </small>Factura # {{$canje->id}}
       </h1>
-
-  @foreach ($carrito->items as $item)
-  <div class="page-break">
-    <table>
-    <thead>
+    @foreach ($carrito->items as $item)
+    <div class="page-break">
+      <table>
+        <thead>
           <tr>
             <th>{{ $item['item']['nombre'] }}</th>
             <th>
-              <img src="{{public_path().'/storage/'. $item['item']['ruta_imagen']}}"  alt="{{$item['item']['id']}}" width="100" height="100" />
+              <img src="{{public_path().'/storage/'. $item['item']['ruta_imagen']}}" alt="{{$item['item']['id']}}" width="100" height="100" />
             </th>
           </tr>
-      </thead>
+        </thead>
 
         <tbody>
           <tr>
@@ -147,16 +147,16 @@ width:150px; height:150px;
               {{ $item['item']['created_at'] }}
             </td>
           </tr>
-
         </tbody>
-        </table>
-  </div>
-  @endforeach
+      </table>
+      <div>
+      </div>
+    </div>
+    @endforeach
+  </main>
+  <footer>
+    Noombre Cliente: {{ Auth::user()->name }}
+  </footer>
+</body>
 
-
-</main>
-<footer>
-Noombre Cliente: {{ Auth::user()->name }}
-</footer>
-  </body>
 </html>

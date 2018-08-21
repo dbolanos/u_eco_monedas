@@ -6,6 +6,7 @@ use PDF;
 use App\CanjeCupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Endroid\QrCode\QrCode;
 
 class CanjeCuponController extends Controller
 {
@@ -30,7 +31,7 @@ class CanjeCuponController extends Controller
   public function descargarPDF($id){
     $canje = CanjeCupon::where('id',$id)->first();
     $carrito = unserialize($canje->cart);
-    $pdf=PDF::loadView('cupones.reportePDF',compact('canje','carrito'));
+    $pdf=PDF::loadView('cupones.reportePDF',compact('canje','carrito','qr'));
     return $pdf->download('reportePDF-'.time().'.pdf');
   }
 }
