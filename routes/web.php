@@ -107,6 +107,14 @@ Route::get('cliente-registro',      ['as' => 'cliente.registro'           , 'use
 //Lista Clientes
 Route::get('lista-clientes',        ['as' => 'lista.clientes'             , 'uses'  => 'ClienteController@mostrarTodosClientes'])->middleware('auth', 'permission:admin');
 
+
+Route::get('/main-upload', 'UploadImagesController@create');
+Route::post('/images-save', 'UploadImagesController@store');
+Route::post('/images-delete', 'UploadImagesController@destroy');
+Route::get('/images-show', 'UploadImagesController@index');
+
+
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
