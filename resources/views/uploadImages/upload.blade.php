@@ -29,7 +29,11 @@
                 <div class="fallback">
                     <input type="file" name="file" multiple>
                 </div>
+
+
             </form>
+            {{--Add button to send the images--}}
+            <button type="submit" id="submit-images" class="btn btn-primary">Submit</button>
         </div>
     </div>
 
